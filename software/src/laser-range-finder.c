@@ -28,6 +28,11 @@
 #include "brickletlib/bricklet_simple.h"
 #include "config.h"
 
+#define I2C_EEPROM_ADDRESS_HIGH 84
+
+#define I2C_ADDRESS_HIGH 0x62 // 7 bit, first bit = read/write
+#define I2C_ADDRESS_LOW  0x62
+
 #define SIMPLE_UNIT_DISTANCE 0
 
 const SimpleMessageProperty smp[] = {
