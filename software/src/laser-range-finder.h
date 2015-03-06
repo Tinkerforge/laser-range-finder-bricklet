@@ -59,14 +59,18 @@ void set_moving_average(const ComType com, const SetMovingAverage *data);
 void get_moving_average(const ComType com, const GetMovingAverage *data);
 
 int32_t distance_from_lidar(const int32_t value);
-uint16_t i2c_read_distance(void);
+uint16_t lidar_get_distance(void);
 void reinitialize_moving_average(void);
+bool lidar_read_register(const uint8_t reg, const uint8_t length, uint8_t *data);
+bool lidar_write_register(const uint8_t reg, const uint8_t length, const uint8_t *data);
 
 void invocation(const ComType com, const uint8_t *data);
 void constructor(void);
 void destructor(void);
 void tick(const uint8_t tick_type);
 
+
+#define CONTINOUS_RW                0x80
 
 // Internal Control Registers
 #define REG_CONTROL                 0x00
@@ -87,6 +91,5 @@ void tick(const uint8_t tick_type);
 #define REG_DELAY_ADD               0x12
 #define REG_DISTANCE_CALIBRATION    0x13
 #define REG_PREV_MEASURED_DISTANCE  0x14 // + 0x15
-
 
 #endif

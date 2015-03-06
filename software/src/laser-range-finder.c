@@ -29,9 +29,7 @@
 #include "config.h"
 
 #define I2C_EEPROM_ADDRESS_HIGH 84
-
-#define I2C_ADDRESS_HIGH 0x62 // 7 bit, first bit = read/write
-#define I2C_ADDRESS_LOW  0x62
+#define I2C_ADDRESS 0x62
 
 #define SIMPLE_UNIT_DISTANCE 0
 
@@ -98,7 +96,7 @@ void destructor(void) {
 }
 
 int32_t distance_from_lidar(const int32_t value) {
-	uint16_t distance = i2c_read_distance();
+	uint16_t distance = lidar_get_distance();
 
 	BC->moving_average_sum = BC->moving_average_sum -
 	                         BC->moving_average[BC->moving_average_tick] +
@@ -110,9 +108,56 @@ int32_t distance_from_lidar(const int32_t value) {
 	return (BC->moving_average_sum + BC->moving_average_upto/2)/BC->moving_average_upto;
 }
 
-uint16_t i2c_read_distance(void) {
-	// TODO: Implement me
+uint16_t lidar_get_distance(void) {
+	// Start conversion
+	if(!lidar_write_register(REG_CONTROL, 1, 0x04)) {
+		// TODO: Use state machine for write "start conversion" and "read distance"
+		return 0;
+	}
+
+	uint16_t value = 0;
+	if(lidar_read_register(REG_DISTANCE, 2, (uint8_t*)&value)) {
+		return value;
+	}
+
+	// TODO: Handle error if NACK was received
 	return 0;
+}
+
+bool lidar_read_register(const uint8_t reg, const uint8_t length, uint8_t *data) {
+	const uint8_t port = BS->port - 'a';
+	BA->bricklet_select(port);
+
+	// TODO: Implement low level to be able to detect NACK
+	BA->TWID_Read(BA->twid,
+	              I2C_ADDRESS,
+	              length > 1 ? (reg | CONTINOUS_RW) : reg,
+	              1,
+	              data,
+	              length,
+	              NULL);
+
+	BA->bricklet_deselect(port);
+
+	return true;
+}
+
+bool lidar_write_register(const uint8_t reg, const uint8_t length, const uint8_t *data) {
+	const uint8_t port = BS->port - 'a';
+	BA->bricklet_select(port);
+
+	// TODO: Implement low level to be able to detect NACK
+	BA->TWID_Write(BA->twid,
+	               I2C_ADDRESS,
+	               length > 1 ? (reg | CONTINOUS_RW) : reg,
+	               1,
+	               (uint8_t*)data,
+	               length,
+	               NULL);
+
+	BA->bricklet_deselect(port);
+
+	return true;
 }
 
 void reinitialize_moving_average(void) {
