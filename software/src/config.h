@@ -41,16 +41,32 @@
 
 #define BOARD_MCK 64000000
 
+#define PIN_PWM (BS->pin1_ad)
+#define PIN_SCL (BS->pin2_da)
+#define PIN_SDA (BS->pin3_pwm)
+#define PIN_PWR (BS->pin4_io)
+
 #define LOGGING_LEVEL LOGGING_DEBUG
 #define DEBUG_BRICKLET 0
 
+#define BRICKLET_VALUE_APPLIED_OUTSIDE
 #define BRICKLET_HAS_SIMPLE_SENSOR
 #define BRICKLET_NO_OFFSET
 #define INVOCATION_IN_BRICKLET_CODE
-#define NUM_SIMPLE_VALUES 1
+#define NUM_SIMPLE_VALUES 2
 
-#define MAX_MOVING_AVERAGE 50
-#define DEFAULT_MOVING_AVERAGE 20
+#define MAX_MOVING_AVERAGE 30
+#define DEFAULT_MOVING_AVERAGE_DISTANCE 10
+#define DEFAULT_MOVING_AVERAGE_VELOCITY 5
+
+typedef enum {
+	MS_DISABLED,
+	MS_UPDATE_MODE,
+	MS_START_ACQUISITION,
+	MS_READ_DISTANCE,
+	MS_TAKE_VELOCITY_MEASUREMENT,
+	MS_READ_VELOCITY,
+} MeasurementState;
 
 typedef struct {
 	int32_t value[NUM_SIMPLE_VALUES];
@@ -72,10 +88,17 @@ typedef struct {
 	char threshold_option_save[NUM_SIMPLE_VALUES];
 	char threshold_option[NUM_SIMPLE_VALUES];
 
-	uint16_t moving_average[MAX_MOVING_AVERAGE];
-	uint32_t moving_average_sum;
-	uint8_t moving_average_tick;
-	uint8_t moving_average_upto;
+	int16_t moving_average_distance[MAX_MOVING_AVERAGE];
+	int16_t moving_average_velocity[MAX_MOVING_AVERAGE];
+	int32_t moving_average_sum[NUM_SIMPLE_VALUES];
+	uint8_t moving_average_tick[NUM_SIMPLE_VALUES];
+	uint8_t moving_average_upto[NUM_SIMPLE_VALUES];
+
+	uint8_t new_mode;
+	bool update_mode;
+	bool laser_enabled;
+	MeasurementState measurement_state;
+	uint8_t next_measurement_state_counter;
 } BrickContext;
 
 #endif
