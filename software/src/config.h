@@ -41,10 +41,10 @@
 
 #define BOARD_MCK 64000000
 
-#define PIN_PWM (BS->pin1_ad)
-#define PIN_SCL (BS->pin2_da)
-#define PIN_SDA (BS->pin3_pwm)
-#define PIN_PWR (BS->pin4_io)
+#define PIN_PWR (BS->pin1_ad)
+#define PIN_SDA (BS->pin2_da)
+#define PIN_SCL (BS->pin3_pwm)
+#define PIN_PWM (BS->pin4_io)
 
 #define LOGGING_LEVEL LOGGING_DEBUG
 #define DEBUG_BRICKLET 0
