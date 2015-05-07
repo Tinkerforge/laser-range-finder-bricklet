@@ -13,6 +13,10 @@ my $lrf = Tinkerforge::BrickletLaserRangeFinder->new(&UID, $ipcon); # Create dev
 $ipcon->connect(&HOST, &PORT); # Connect to brickd
 # Don't use device before ipcon is connected
 
+# Turn laser on and wait 250ms for very first measurement to be ready
+$lrf->enable_laser();
+select(undef, undef, undef, 0.25);
+
 # Get current distance (unit is cm)
 my $distance = $lrf->get_distance();
 print "Distance: $distance cm\n";

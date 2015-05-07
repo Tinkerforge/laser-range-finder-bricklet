@@ -21,6 +21,10 @@ sub cb_distance
 $ipcon->connect(&HOST, &PORT); # Connect to brickd
 # Don't use device before ipcon is connected
 
+# Turn laser on and wait 250ms for very first measurement to be ready
+$lrf->enable_laser();
+select(undef, undef, undef, 0.25);
+
 # Set Period for distance callback to 1s (1000ms)
 # Note: The distance callback is only called every second if the 
 #       distance has changed since the last call!

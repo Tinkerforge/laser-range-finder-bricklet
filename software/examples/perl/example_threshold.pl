@@ -21,6 +21,10 @@ sub cb_reached
 $ipcon->connect(&HOST, &PORT); # Connect to brickd
 # Don't use device before ipcon is connected
 
+# Turn laser on and wait 250ms for very first measurement to be ready
+$lrf->enable_laser();
+select(undef, undef, undef, 0.25);
+
 # Get threshold callbacks with a debounce time of 10 seconds (10000ms)
 $lrf->set_debounce_period(10000);
 
