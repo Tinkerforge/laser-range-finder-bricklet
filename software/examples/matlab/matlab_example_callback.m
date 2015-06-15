@@ -4,7 +4,7 @@ function matlab_example_callback()
 
     HOST = 'localhost';
     PORT = 4223;
-    UID = 'amb'; % Change to your UID
+    UID = 'XYZ'; % Change to your UID
 
     ipcon = IPConnection(); % Create IP connection
     lrf = BrickletLaserRangeFinder(UID, ipcon); % Create device object

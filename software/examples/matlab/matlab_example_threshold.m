@@ -4,7 +4,7 @@ function matlab_example_threshold()
 
     HOST = 'localhost';
     PORT = 4223;
-    UID = 'amb'; % Change to your UID
+    UID = 'XYZ'; % Change to your UID
 
     ipcon = IPConnection(); % Create IP connection
     lrf = BrickletLaserRangeFinder(UID, ipcon); % Create device object
@@ -31,5 +31,5 @@ end
 
 % Callback for distance greater than 20 cm
 function cb_reached(e)
-    fprintf('Distance %g cm\n', e.distance);
+    fprintf('Distance: %g cm\n', e.distance);
 end
