@@ -35,6 +35,7 @@ ipcon.on(Tinkerforge.IPConnection.CALLBACK_CONNECTED,
 console.log("Press any key to exit ...");
 process.stdin.on('data',
     function(data) {
+        lrf.disableLaser(); // Turn laser off
         ipcon.disconnect();
         process.exit(0);
     }

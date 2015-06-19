@@ -9,10 +9,10 @@ class Example
 	// Callback for distance greater than 20 cm
 	static void ReachedCB(BrickletLaserRangeFinder sender, int distance)
 	{
-		System.Console.WriteLine("Distance: " + distance + " cm.");
+		System.Console.WriteLine("Distance: " + distance + " cm");
 	}
 
-	static void Main() 
+	static void Main()
 	{
 		IPConnection ipcon = new IPConnection(); // Create IP connection
 		BrickletLaserRangeFinder lrf = new BrickletLaserRangeFinder(UID, ipcon); // Create device object
@@ -35,6 +35,7 @@ class Example
 
 		System.Console.WriteLine("Press enter to exit");
 		System.Console.ReadLine();
+		lrf.DisableLaser(); // Turn laser off
 		ipcon.Disconnect();
 	}
 }

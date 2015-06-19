@@ -55,8 +55,7 @@
                 lrf.on(Tinkerforge.BrickletLaserRangeFinder.CALLBACK_DISTANCE,
                     // Callback function for distance callback (parameter has unit cm)
                     function(distance) {
-                        textArea.value += 'Distance: '+distance+' cm';
-                        textArea.value += '\n';
+                        textArea.value += 'Distance: '+distance+' cm\n';
                         textArea.scrollTop = textArea.scrollHeight;
                     }
                 );

@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-# -*- coding: utf-8 -*-  
+# -*- coding: utf-8 -*-
 
 HOST = "localhost"
 PORT = 4223
@@ -24,10 +24,8 @@ if __name__ == "__main__":
     # Get current distance (unit is cm)
     distance = lrf.get_distance()
 
-    # Turn laser off
-    lrf.disable_laser()
-
     print('Distance: ' + str(distance) + ' cm')
 
     raw_input('Press key to exit\n') # Use input() in Python 3
+    lrf.disable_laser() # Turn laser off
     ipcon.disconnect()

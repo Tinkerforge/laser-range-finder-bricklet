@@ -1,4 +1,4 @@
-#!/usr/bin/perl  
+#!/usr/bin/perl
 
 use Tinkerforge::IPConnection;
 use Tinkerforge::BrickletLaserRangeFinder;
@@ -23,4 +23,5 @@ print "Distance: $distance cm\n";
 
 print "Press any key to exit...\n";
 <STDIN>;
+$lrf->disable_laser(); # Turn laser off
 $ipcon->disconnect();

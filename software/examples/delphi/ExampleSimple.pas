@@ -46,6 +46,7 @@ begin
 
   WriteLn('Press key to exit');
   ReadLn;
+  lrf.DisableLaser; { Turn laser off }
   ipcon.Destroy; { Calls ipcon.Disconnect internally }
 end;
 

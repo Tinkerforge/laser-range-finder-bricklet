@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-#if defined(WIN32)
+#ifdef WIN32
  #include <windows.h>
 #else
  #include <unistd.h>
@@ -20,7 +20,7 @@ int main() {
 
 	// Create device object
 	LaserRangeFinder lrf;
-	laser_range_finder_create(&lrf, UID, &ipcon); 
+	laser_range_finder_create(&lrf, UID, &ipcon);
 
 	// Connect to brickd
 	if(ipcon_connect(&ipcon, HOST, PORT) < 0) {
@@ -29,12 +29,13 @@ int main() {
 	}
 	// Don't use device before ipcon is connected
 
-    // Turn laser on and wait 250ms for very first measurement to be ready
-    laser_range_finder_enable_laser(&lrf);
-#if defined WIN32
+	// Turn laser on and wait 250ms for very first measurement to be ready
+	laser_range_finder_enable_laser(&lrf);
+
+#ifdef WIN32
 	Sleep(250);
 #else
- 	usleep(250 * 1000);
+	usleep(250 * 1000);
 #endif
 
 	// Get current distance (unit is cm)
@@ -48,5 +49,6 @@ int main() {
 
 	printf("Press key to exit\n");
 	getchar();
+	laser_range_finder_disable_laser(&lrf); // Turn laser off
 	ipcon_destroy(&ipcon); // Calls ipcon_disconnect internally
 }

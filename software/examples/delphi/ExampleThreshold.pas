@@ -27,7 +27,7 @@ var
 { Callback for distance greater than 20 cm }
 procedure TExample.ReachedCB(sender: TBrickletLaserRangeFinder; const distance: word);
 begin
-  WriteLn(Format('Distance: %d cm.', [distance]));
+  WriteLn(Format('Distance: %d cm', [distance]));
 end;
 
 procedure TExample.Execute;
@@ -57,6 +57,7 @@ begin
 
   WriteLn('Press key to exit');
   ReadLn;
+  lrf.DisableLaser; { Turn laser off }
   ipcon.Destroy; { Calls ipcon.Disconnect internally }
 end;
 

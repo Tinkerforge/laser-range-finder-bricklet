@@ -15,8 +15,8 @@ public class ExampleSimple {
 		ipcon.connect(HOST, PORT); // Connect to brickd
 		// Don't use device before ipcon is connected
 
-    	// Turn laser on and wait 250ms for very first measurement to be ready
-	    lrf.enableLaser();
+		// Turn laser on and wait 250ms for very first measurement to be ready
+		lrf.enableLaser();
 		Thread.sleep(250);
 
 		// Get current distance (unit is cm)
@@ -25,6 +25,7 @@ public class ExampleSimple {
 		System.out.println("Distance: " + distance + " cm");
 
 		System.out.println("Press key to exit"); System.in.read();
+		lrf.disableLaser(); // Turn laser off
 		ipcon.disconnect();
 	}
 }

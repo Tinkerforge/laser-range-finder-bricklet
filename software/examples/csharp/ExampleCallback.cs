@@ -12,7 +12,7 @@ class Example
 		System.Console.WriteLine("Distance: " + distance + " cm");
 	}
 
-	static void Main() 
+	static void Main()
 	{
 		IPConnection ipcon = new IPConnection(); // Create IP connection
 		BrickletLaserRangeFinder lrf = new BrickletLaserRangeFinder(UID, ipcon); // Create device object
@@ -23,9 +23,9 @@ class Example
 		// Turn laser on and wait 250ms for very first measurement to be ready
 		lrf.EnableLaser();
 		System.Threading.Thread.Sleep(250);
-		
+
 		// Set Period for distance callback to 1s (1000ms)
-		// Note: The distance callback is only called every second if the 
+		// Note: The distance callback is only called every second if the
 		//       distance has changed since the last call!
 		lrf.SetDistanceCallbackPeriod(1000);
 
@@ -34,6 +34,7 @@ class Example
 
 		System.Console.WriteLine("Press enter to exit");
 		System.Console.ReadLine();
+		lrf.DisableLaser(); // Turn laser off
 		ipcon.Disconnect();
 	}
 }

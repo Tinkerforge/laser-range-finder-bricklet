@@ -24,7 +24,7 @@ $ipcon->connect(HOST, PORT); // Connect to brickd
 
 // Turn laser on and wait 250ms for very first measurement to be ready
 $lrf->enableLaser();
-usleep(1000*250);
+usleep(250*1000);
 
 // Get threshold callbacks with a debounce time of 10 seconds (10000ms)
 $lrf->setDebouncePeriod(10000);

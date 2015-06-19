@@ -55,7 +55,7 @@
                 lrf.on(Tinkerforge.BrickletLaserRangeFinder.CALLBACK_DISTANCE_REACHED,
                     // Callback for distance greater than 20 cm
                     function(distance) {
-                        textArea.value += 'Distance: ' +distance + ' cm\n';
+                        textArea.value += 'Distance: ' + distance + ' cm\n';
                         textArea.scrollTop = textArea.scrollHeight;
                     }
                 );

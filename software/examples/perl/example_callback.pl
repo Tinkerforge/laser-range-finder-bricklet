@@ -1,4 +1,4 @@
-#!/usr/bin/perl  
+#!/usr/bin/perl
 
 use Tinkerforge::IPConnection;
 use Tinkerforge::BrickletLaserRangeFinder;
@@ -26,7 +26,7 @@ $lrf->enable_laser();
 select(undef, undef, undef, 0.25);
 
 # Set Period for distance callback to 1s (1000ms)
-# Note: The distance callback is only called every second if the 
+# Note: The distance callback is only called every second if the
 #       distance has changed since the last call!
 $lrf->set_distance_callback_period(1000);
 
@@ -35,4 +35,5 @@ $lrf->register_callback($lrf->CALLBACK_DISTANCE, 'cb_distance');
 
 print "Press any key to exit...\n";
 <STDIN>;
+$lrf->disable_laser(); # Turn laser off
 $ipcon->disconnect();

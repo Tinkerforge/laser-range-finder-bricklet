@@ -31,13 +31,14 @@ ipcon.on(Tinkerforge.IPConnection.CALLBACK_CONNECTED,
 lrf.on(Tinkerforge.BrickletLaserRangeFinder.CALLBACK_DISTANCE_REACHED,
     // Callback for distance greater than 20 cm
     function(distance) {
-        console.log('Distance: ' +distance + ' cm.');
+        console.log('Distance: ' + distance + ' cm');
     }
 );
 
 console.log("Press any key to exit ...");
 process.stdin.on('data',
     function(data) {
+        lrf.disableLaser(); // Turn laser off
         ipcon.disconnect();
         process.exit(0);
     }

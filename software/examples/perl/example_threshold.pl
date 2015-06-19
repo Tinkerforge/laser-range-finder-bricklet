@@ -15,7 +15,7 @@ sub cb_reached
 {
     my ($distance) = @_;
 
-    print "Distance ".$distance." cm\n";
+    print "Distance: ".$distance." cm\n";
 }
 
 $ipcon->connect(&HOST, &PORT); # Connect to brickd
@@ -36,4 +36,5 @@ $lrf->set_distance_callback_threshold('>', 20, 0);
 
 print "Press any key to exit...\n";
 <STDIN>;
+$lrf->disable_laser(); # Turn laser off
 $ipcon->disconnect();

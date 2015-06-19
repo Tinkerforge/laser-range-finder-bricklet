@@ -19,6 +19,10 @@ if __name__ == "__main__":
     ipcon.connect(HOST, PORT) # Connect to brickd
     # Don't use device before ipcon is connected
 
+    # Turn laser on and wait 250ms for very first measurement to be ready
+    lrf.enable_laser()
+    time.sleep(0.25)
+
     # Set Period for distance callback to 200ms
     # Note: The distance callback is only called every second if the 
     #       distance has changed since the last call!
@@ -27,7 +31,6 @@ if __name__ == "__main__":
     # Register distance callback to function cb_distance
     lrf.register_callback(lrf.CALLBACK_DISTANCE, cb_distance)
 
-    lrf.enable_laser()
-
     raw_input('Press key to exit\n') # Use input() in Python 3
+    lrf.disable_laser() # Turn laser off
     ipcon.disconnect()

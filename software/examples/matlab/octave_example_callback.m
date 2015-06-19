@@ -11,9 +11,9 @@ function octave_example_callback()
     ipcon.connect(HOST, PORT); % Connect to brickd
     % Don't use device before ipcon is connected
 
-	% Turn laser on and wait 250ms for very first measurement to be ready
-	lrf.enableLaser();
-	pause(0.25);
+    % Turn laser on and wait 250ms for very first measurement to be ready
+    lrf.enableLaser();
+    pause(0.25);
 
     % Set Period for distance callback to 1s (1000ms)
     % Note: The callback is only called every second if the
@@ -24,6 +24,7 @@ function octave_example_callback()
     lrf.addDistanceCallback(@cb_distance);
 
     input("Press any key to exit...\n", "s");
+    lrf.disableLaser(); % Turn laser off
     ipcon.disconnect();
 end
 

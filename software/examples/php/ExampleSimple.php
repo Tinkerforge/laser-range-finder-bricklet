@@ -18,7 +18,7 @@ $ipcon->connect(HOST, PORT); // Connect to brickd
 
 // Turn laser on and wait 250ms for very first measurement to be ready
 $lrf->enableLaser();
-usleep(1000*250);
+usleep(250*1000);
 
 // Get current distance (unit is cm)
 $distance = $lrf->getDistance();
@@ -27,6 +27,7 @@ echo "Distance: $distance cm\n";
 
 echo "Press key to exit\n";
 fgetc(fopen('php://stdin', 'r'));
+$lrf->disableLaser(); // Turn laser off
 $ipcon->disconnect();
 
 ?>

@@ -15,25 +15,26 @@ public class ExampleThreshold {
 		ipcon.connect(HOST, PORT); // Connect to brickd
 		// Don't use device before ipcon is connected
 
-    	// Turn laser on and wait 250ms for very first measurement to be ready
-	    lrf.enableLaser();
+		// Turn laser on and wait 250ms for very first measurement to be ready
+		lrf.enableLaser();
 		Thread.sleep(250);
 
 		// Get threshold callbacks with a debounce time of 10 seconds (10000ms)
 		lrf.setDebouncePeriod(10000);
 
 		// Configure threshold for "greater than 20 cm"
-		lrf.setDistanceCallbackThreshold('>', (short)(20), (short)0);
+		lrf.setDistanceCallbackThreshold('>', 20, 0);
 
-		// Add and implement distance reached listener 
+		// Add and implement distance reached listener
 		// (called if distance is greater than 20 cm)
 		lrf.addDistanceReachedListener(new BrickletLaserRangeFinder.DistanceReachedListener() {
 			public void distanceReached(int distance) {
-				System.out.println("Distance: " + distance + " cm.");
+				System.out.println("Distance: " + distance + " cm");
 			}
 		});
 
 		System.out.println("Press key to exit"); System.in.read();
+		lrf.disableLaser(); // Turn laser off
 		ipcon.disconnect();
 	}
 }

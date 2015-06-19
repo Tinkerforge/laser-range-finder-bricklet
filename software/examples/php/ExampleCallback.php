@@ -24,7 +24,7 @@ $ipcon->connect(HOST, PORT); // Connect to brickd
 
 // Turn laser on and wait 250ms for very first measurement to be ready
 $lrf->enableLaser();
-usleep(1000*250);
+usleep(250*1000);
 
 // Set Period for distance callback to 1s (1000ms)
 // Note: The distance callback is only called every second if the

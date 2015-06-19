@@ -6,7 +6,7 @@ class Example
 	private static int PORT = 4223;
 	private static string UID = "XYZ"; // Change to your UID
 
-	static void Main() 
+	static void Main()
 	{
 		IPConnection ipcon = new IPConnection(); // Create IP connection
 		BrickletLaserRangeFinder lrf = new BrickletLaserRangeFinder(UID, ipcon); // Create device object
@@ -25,6 +25,7 @@ class Example
 
 		System.Console.WriteLine("Press enter to exit");
 		System.Console.ReadLine();
+		lrf.DisableLaser(); // Turn laser off
 		ipcon.Disconnect();
 	}
 }
