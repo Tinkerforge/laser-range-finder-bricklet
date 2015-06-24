@@ -1,3 +1,7 @@
+#ifndef _BSD_SOURCE
+ #define _BSD_SOURCE // for usleep
+#endif
+
 #include <stdio.h>
 
 #ifdef WIN32
