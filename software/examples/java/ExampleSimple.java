@@ -1,5 +1,5 @@
-import com.tinkerforge.BrickletLaserRangeFinder;
 import com.tinkerforge.IPConnection;
+import com.tinkerforge.BrickletLaserRangeFinder;
 
 public class ExampleSimple {
 	private static final String HOST = "localhost";
