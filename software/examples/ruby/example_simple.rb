@@ -26,4 +26,5 @@ puts "Distance: #{distance} cm"
 
 puts 'Press key to exit'
 $stdin.gets
+lrf.disable_laser # Turn laser off
 ipcon.disconnect
