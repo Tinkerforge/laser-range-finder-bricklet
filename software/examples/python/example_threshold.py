@@ -6,7 +6,7 @@ PORT = 4223
 UID = "XYZ" # Change to your UID
 
 from tinkerforge.ip_connection import IPConnection
-from tinkerforge.bricklet_laser_range_finder import LaserRangeFinder
+from tinkerforge.bricklet_laser_range_finder import BrickletLaserRangeFinder
 
 # Callback for distance greater than 200 cm
 def cb_reached(distance):
