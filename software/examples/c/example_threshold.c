@@ -24,7 +24,7 @@ void cb_reached(uint16_t distance, void *user_data) {
 	printf("Distance: %d cm\n", distance);
 }
 
-int main() {
+int main(void) {
 	// Create IP connection
 	IPConnection ipcon;
 	ipcon_create(&ipcon);
@@ -36,7 +36,7 @@ int main() {
 	// Connect to brickd
 	if(ipcon_connect(&ipcon, HOST, PORT) < 0) {
 		fprintf(stderr, "Could not connect\n");
-		exit(1);
+		return 1;
 	}
 	// Don't use device before ipcon is connected
 
@@ -65,4 +65,5 @@ int main() {
 	getchar();
 	laser_range_finder_disable_laser(&lrf); // Turn laser off
 	ipcon_destroy(&ipcon); // Calls ipcon_disconnect internally
+	return 0;
 }
