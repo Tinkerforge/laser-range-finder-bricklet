@@ -27,7 +27,7 @@ int main(void) {
 
 	// Turn laser on and wait 250ms for very first measurement to be ready
 	laser_range_finder_enable_laser(&lrf);
-	millisleep(2500);
+	millisleep(250);
 
 	// Get current distance (unit is cm)
 	uint16_t distance;
