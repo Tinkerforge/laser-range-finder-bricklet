@@ -1,14 +1,6 @@
-#ifndef _BSD_SOURCE
- #define _BSD_SOURCE // for usleep
-#endif
-
 #include <stdio.h>
 
-#ifdef WIN32
- #include <windows.h>
-#else
- #include <unistd.h>
-#endif
+#define IPCON_EXPOSE_MILLISLEEP
 
 #include "ip_connection.h"
 #include "bricklet_laser_range_finder.h"
@@ -35,12 +27,7 @@ int main(void) {
 
 	// Turn laser on and wait 250ms for very first measurement to be ready
 	laser_range_finder_enable_laser(&lrf);
-
-#ifdef WIN32
-	Sleep(250);
-#else
-	usleep(250 * 1000);
-#endif
+	millisleep(2500);
 
 	// Get current distance (unit is cm)
 	uint16_t distance;
@@ -55,4 +42,5 @@ int main(void) {
 	getchar();
 	laser_range_finder_disable_laser(&lrf); // Turn laser off
 	ipcon_destroy(&ipcon); // Calls ipcon_disconnect internally
+	return 0;
 }

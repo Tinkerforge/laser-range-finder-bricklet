@@ -1,14 +1,6 @@
-#ifndef _BSD_SOURCE
- #define _BSD_SOURCE // for usleep
-#endif
-
 #include <stdio.h>
 
-#ifdef WIN32
- #include <windows.h>
-#else
- #include <unistd.h>
-#endif
+#define IPCON_EXPOSE_MILLISLEEP
 
 #include "ip_connection.h"
 #include "bricklet_laser_range_finder.h"
@@ -42,12 +34,7 @@ int main(void) {
 
 	// Turn laser on and wait 250ms for very first measurement to be ready
 	laser_range_finder_enable_laser(&lrf);
-
-#ifdef WIN32
-	Sleep(250);
-#else
-	usleep(250 * 1000);
-#endif
+	millisleep(250);
 
 	// Get threshold callbacks with a debounce time of 10 seconds (10000ms)
 	laser_range_finder_set_debounce_period(&lrf, 10000);
