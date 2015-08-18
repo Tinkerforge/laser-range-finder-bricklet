@@ -13,9 +13,9 @@ Module ExampleSimple
         ipcon.Connect(HOST, PORT) ' Connect to brickd
         ' Don't use device before ipcon is connected
 
-		' Turn laser on and wait 250ms for very first measurement to be ready
-		lrf.EnableLaser()
-		Thread.Sleep(250)
+        ' Turn laser on and wait 250ms for very first measurement to be ready
+        lrf.EnableLaser()
+        Thread.Sleep(250)
 
         ' Get current distance (unit is cm)
         Dim distance As Integer = lrf.GetDistance()
@@ -24,6 +24,7 @@ Module ExampleSimple
 
         System.Console.WriteLine("Press key to exit")
         System.Console.ReadLine()
+        lrf.DisableLaser() ' Turn laser off
         ipcon.Disconnect()
     End Sub
 End Module

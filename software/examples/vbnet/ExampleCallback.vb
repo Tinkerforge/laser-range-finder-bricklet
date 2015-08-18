@@ -18,9 +18,9 @@ Module ExampleCallback
         ipcon.Connect(HOST, PORT) ' Connect to brickd
         ' Don't use device before ipcon is connected
 
-		' Turn laser on and wait 250ms for very first measurement to be ready
-		lrf.EnableLaser()
-		Thread.Sleep(250)
+        ' Turn laser on and wait 250ms for very first measurement to be ready
+        lrf.EnableLaser()
+        Thread.Sleep(250)
 
         ' Set Period for distance callback to 1s (1000ms)
         ' Note: The distance callback is only called every second if the
@@ -32,6 +32,7 @@ Module ExampleCallback
 
         System.Console.WriteLine("Press key to exit")
         System.Console.ReadLine()
+        lrf.DisableLaser() ' Turn laser off
         ipcon.Disconnect()
     End Sub
 End Module
