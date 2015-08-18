@@ -16,7 +16,7 @@ def cb_reached(distance):
 
 if __name__ == "__main__":
     ipcon = IPConnection() # Create IP connection
-    lrf = LaserRangeFinder(UID, ipcon) # Create device object
+    lrf = BrickletLaserRangeFinder(UID, ipcon) # Create device object
 
     ipcon.connect(HOST, PORT) # Connect to brickd
     # Don't use device before ipcon is connected
