@@ -277,6 +277,7 @@ void tick(const uint8_t tick_type) {
 }
 
 bool lidar_read_register(const uint8_t reg, const uint8_t length, uint8_t *data) {
+	__disable_irq();
 	i2c_start();
 	if(!i2c_send_byte((I2C_ADDRESS << 1) | I2C_WRITE)) {
 		i2c_stop();
@@ -297,11 +298,13 @@ bool lidar_read_register(const uint8_t reg, const uint8_t length, uint8_t *data)
 		data[i] = i2c_recv_byte(i != (length - 1));
 	}
 	i2c_stop();
+	__enable_irq();
 
 	return true;
 }
 
 bool lidar_write_register(const uint8_t reg, const uint8_t length, const uint8_t *data) {
+	__disable_irq();
 	i2c_start();
 	if(!i2c_send_byte((I2C_ADDRESS << 1) | I2C_WRITE)) {
 		return false;
@@ -315,6 +318,7 @@ bool lidar_write_register(const uint8_t reg, const uint8_t length, const uint8_t
 		}
 	}
 	i2c_stop();
+	__enable_irq();
 
 	return true;
 }
