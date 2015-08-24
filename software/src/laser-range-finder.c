@@ -281,16 +281,19 @@ bool lidar_read_register(const uint8_t reg, const uint8_t length, uint8_t *data)
 	i2c_start();
 	if(!i2c_send_byte((I2C_ADDRESS << 1) | I2C_WRITE)) {
 		i2c_stop();
+		__enable_irq();
 		return false;
 	}
 	if(!i2c_send_byte(length > 1 ? (reg | CONTINOUS_RW) : reg)) {
 		i2c_stop();
+		__enable_irq();
 		return false;
 	}
 	i2c_stop();
 	i2c_start();
 	if(!i2c_send_byte((I2C_ADDRESS << 1) | I2C_READ)) {
 		i2c_stop();
+		__enable_irq();
 		return false;
 	}
 
@@ -307,13 +310,19 @@ bool lidar_write_register(const uint8_t reg, const uint8_t length, const uint8_t
 	__disable_irq();
 	i2c_start();
 	if(!i2c_send_byte((I2C_ADDRESS << 1) | I2C_WRITE)) {
+		i2c_stop();
+		__enable_irq();
 		return false;
 	}
 	if(!i2c_send_byte(length > 1 ? (reg | CONTINOUS_RW) : reg)) {
+		i2c_stop();
+		__enable_irq();
 		return false;
 	}
 	for(uint8_t i = 0; i < length; i++) {
 		if(!i2c_send_byte(data[i])) {
+			i2c_stop();
+			__enable_irq();
 			return false;
 		}
 	}
