@@ -10,9 +10,9 @@ import time
 from tinkerforge.ip_connection import IPConnection
 from tinkerforge.bricklet_laser_range_finder import BrickletLaserRangeFinder
 
-# Callback for distance greater than 200 cm
-def cb_reached(distance):
-    print('Distance ' + str(distance) + ' cm.')
+# Callback function for distance reached callback (parameter has unit cm)
+def cb_distance_reached(distance):
+    print("Distance: " + str(distance) + " cm")
 
 if __name__ == "__main__":
     ipcon = IPConnection() # Create IP connection
@@ -25,15 +25,15 @@ if __name__ == "__main__":
     lrf.enable_laser()
     time.sleep(0.25)
 
-    # Get threshold callbacks with a debounce time of 1 seconds (1000ms)
-    lrf.set_debounce_period(1000)
+    # Get threshold callbacks with a debounce time of 10 seconds (10000ms)
+    lrf.set_debounce_period(10000)
 
-    # Register threshold reached callback to function cb_reached
-    lrf.register_callback(lrf.CALLBACK_DISTANCE_REACHED, cb_reached)
+    # Register distance reached callback to function cb_distance_reached
+    lrf.register_callback(lrf.CALLBACK_DISTANCE_REACHED, cb_distance_reached)
 
-    # Configure threshold for "greater than 200 cm"
-    lrf.set_distance_callback_threshold('>', 200, 0)
+    # Configure threshold for distance "greater than 20 cm" (unit is cm)
+    lrf.set_distance_callback_threshold(">", 20, 0)
 
-    raw_input('Press key to exit\n') # Use input() in Python 3
+    raw_input("Press key to exit\n") # Use input() in Python 3
     lrf.disable_laser() # Turn laser off
     ipcon.disconnect()

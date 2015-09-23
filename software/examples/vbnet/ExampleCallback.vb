@@ -1,14 +1,15 @@
-Imports Tinkerforge
+Imports System
 Imports System.Threading
+Imports Tinkerforge
 
 Module ExampleCallback
     Const HOST As String = "localhost"
     Const PORT As Integer = 4223
     Const UID As String = "XYZ" ' Change to your UID
 
-    ' Callback function for distance callback (parameter has unit cm)
+    ' Callback subroutine for distance callback (parameter has unit cm)
     Sub DistanceCB(ByVal sender As BrickletLaserRangeFinder, ByVal distance As Integer)
-        System.Console.WriteLine("Distance: " + distance.ToString() + " cm")
+        Console.WriteLine("Distance: " + distance.ToString() + " cm")
     End Sub
 
     Sub Main()
@@ -22,16 +23,16 @@ Module ExampleCallback
         lrf.EnableLaser()
         Thread.Sleep(250)
 
-        ' Set Period for distance callback to 1s (1000ms)
-        ' Note: The distance callback is only called every second if the
-        '       distance has changed since the last call!
-        lrf.SetDistanceCallbackPeriod(1000)
-
-        ' Register distance callback to function DistanceCB
+        ' Register distance callback to subroutine DistanceCB
         AddHandler lrf.Distance, AddressOf DistanceCB
 
-        System.Console.WriteLine("Press key to exit")
-        System.Console.ReadLine()
+        ' Set period for distance callback to 0.2s (200ms)
+        ' Note: The distance callback is only called every 0.2 seconds
+        '       if the distance has changed since the last call!
+        lrf.SetDistanceCallbackPeriod(200)
+
+        Console.WriteLine("Press key to exit")
+        Console.ReadLine()
         lrf.DisableLaser() ' Turn laser off
         ipcon.Disconnect()
     End Sub

@@ -15,20 +15,20 @@ function octave_example_callback()
     lrf.enableLaser();
     pause(0.25);
 
-    % Set Period for distance callback to 1s (1000ms)
-    % Note: The callback is only called every second if the
-    %       distance has changed since the last call!
-    lrf.setDistanceCallbackPeriod(1000);
-
     % Register distance callback to function cb_distance
     lrf.addDistanceCallback(@cb_distance);
 
-    input("Press any key to exit...\n", "s");
+    % Set period for distance callback to 0.2s (200ms)
+    % Note: The distance callback is only called every 0.2 seconds
+    %       if the distance has changed since the last call!
+    lrf.setDistanceCallbackPeriod(200);
+
+    input("Press key to exit\n", "s");
     lrf.disableLaser(); % Turn laser off
     ipcon.disconnect();
 end
 
 % Callback function for distance callback (parameter has unit cm)
 function cb_distance(e)
-    fprintf("Distance: %g cm\n", e.distance);
+    fprintf("Distance: %d cm\n", e.distance);
 end

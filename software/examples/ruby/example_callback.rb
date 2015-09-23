@@ -20,15 +20,15 @@ ipcon.connect HOST, PORT # Connect to brickd
 lrf.enable_laser
 sleep 0.25
 
-# Set Period for distance callback to 1s (1000ms)
-# Note: The distance callback is only called every second if the 
-#       distance has changed since the last call!
-lrf.set_distance_callback_period 1000
-
 # Register distance callback (parameter has unit cm)
 lrf.register_callback(BrickletLaserRangeFinder::CALLBACK_DISTANCE) do |distance|
   puts "Distance: #{distance} cm"
 end
+
+# Set period for distance callback to 0.2s (200ms)
+# Note: The distance callback is only called every 0.2 seconds
+#       if the distance has changed since the last call!
+lrf.set_distance_callback_period 200
 
 puts 'Press key to exit'
 $stdin.gets

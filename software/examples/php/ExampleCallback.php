@@ -13,7 +13,7 @@ const UID = 'XYZ'; // Change to your UID
 // Callback function for distance callback (parameter has unit cm)
 function cb_distance($distance)
 {
-    echo "Distance: " . $distance . " cm\n";
+    echo "Distance: $distance cm\n";
 }
 
 $ipcon = new IPConnection(); // Create IP connection
@@ -26,13 +26,13 @@ $ipcon->connect(HOST, PORT); // Connect to brickd
 $lrf->enableLaser();
 usleep(250*1000);
 
-// Set Period for distance callback to 1s (1000ms)
-// Note: The distance callback is only called every second if the
-//       distance has changed since the last call!
-$lrf->setDistanceCallbackPeriod(1000);
-
 // Register distance callback to function cb_distance
 $lrf->registerCallback(BrickletLaserRangeFinder::CALLBACK_DISTANCE, 'cb_distance');
+
+// Set period for distance callback to 0.2s (200ms)
+// Note: The distance callback is only called every 0.2 seconds
+//       if the distance has changed since the last call!
+$lrf->setDistanceCallbackPeriod(200);
 
 echo "Press ctrl+c to exit\n";
 $ipcon->dispatchCallbacks(-1); // Dispatch callbacks forever

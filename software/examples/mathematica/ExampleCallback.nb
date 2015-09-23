@@ -3,10 +3,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[         0,          0]
-NotebookDataLength[      6932,        167]
-NotebookOptionsPosition[      6505,        146]
-NotebookOutlinePosition[      6837,        161]
-CellTagsIndexPosition[      6794,        158]
+NotebookDataLength[      6725,        165]
+NotebookOptionsPosition[      6298,        144]
+NotebookOutlinePosition[      6630,        159]
+CellTagsIndexPosition[      6587,        156]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -27,66 +27,44 @@ Cell[BoxData[{
    3.643695547928421*^9, 3.643695550036632*^9}}],
 
 Cell[BoxData[{
- RowBox[{"host", "=", "\"\<localhost\>\""}], "\[IndentingNewLine]", 
- RowBox[{"port", "=", "4223"}], "\[IndentingNewLine]", 
+ RowBox[{"host", "=", "\"\<localhost\>\""}], "\n", 
+ RowBox[{"port", "=", "4223"}], "\n", 
  RowBox[{
   RowBox[{"uid", "=", "\"\<XYZ\>\""}], 
-  RowBox[{"(*", " ", 
-   RowBox[{"Change", " ", "to", " ", "your", " ", "UID"}], " ", "*)"}], 
-  "\[IndentingNewLine]", "\[IndentingNewLine]", 
-  RowBox[{"(*", " ", 
+  RowBox[{"(*", 
+   RowBox[{"Change", " ", "to", " ", "your", " ", "UID"}], "*)"}], "\n", 
+  "\[IndentingNewLine]", 
+  RowBox[{"(*", 
    RowBox[{
    "Create", " ", "IPConnection", " ", "and", " ", "device", " ", "object"}], 
-   " ", "*)"}]}], "\[IndentingNewLine]", 
+   "*)"}]}], "\[IndentingNewLine]", 
  RowBox[{"ipcon", "=", 
   RowBox[{"NETNew", "[", "\"\<Tinkerforge.IPConnection\>\"", "]"}]}], "\n", 
  RowBox[{"lrf", "=", 
   RowBox[{"NETNew", "[", 
    RowBox[{
    "\"\<Tinkerforge.BrickletLaserRangeFinder\>\"", ",", "uid", ",", "ipcon"}],
-    "]"}]}], "\[IndentingNewLine]", 
+    "]"}]}], "\n", 
  RowBox[{
   RowBox[{"ipcon", "@", 
    RowBox[{"Connect", "[", 
-    RowBox[{"host", ",", "port"}], "]"}]}], "\[IndentingNewLine]", 
-  "\[IndentingNewLine]", 
-  RowBox[{"(*", " ", 
+    RowBox[{"host", ",", "port"}], "]"}]}], "\n", "\[IndentingNewLine]", 
+  RowBox[{"(*", 
    RowBox[{
    "Turn", " ", "laser", " ", "on", " ", "and", " ", "wait", " ", "250", "ms",
      " ", "for", " ", "very", " ", "first", " ", "measurement", " ", "to", 
-    " ", "be", " ", "ready"}], " ", "*)"}]}], "\[IndentingNewLine]", 
+    " ", "be", " ", "ready"}], "*)"}]}], "\[IndentingNewLine]", 
  RowBox[{"lrf", "@", 
-  RowBox[{"EnableLaser", "[", "]"}]}], "\[IndentingNewLine]", 
+  RowBox[{"EnableLaser", "[", "]"}]}], "\n", 
  RowBox[{
   RowBox[{"Pause", "[", "0.25", "]"}], "\n", "\[IndentingNewLine]", 
-  RowBox[{"(*", " ", 
-   RowBox[{
-   "Set", " ", "Period", " ", "for", " ", "distance", " ", "callback", " ", 
-    "to", " ", "1", "s", " ", 
-    RowBox[{"(", 
-     RowBox[{"1000", "ms"}], ")"}]}], " ", "*)"}], "\n", 
-  RowBox[{"(*", " ", 
-   RowBox[{"Note", ":", " ", 
-    RowBox[{
-    "The", " ", "distance", " ", "callback", " ", "is", " ", "only", " ", 
-     "called", " ", "every", " ", "second", " ", "if", " ", "the"}]}], " ", 
-   "*)"}], "\n", 
-  RowBox[{"(*", "       ", 
-   RowBox[{
-   "distance", " ", "has", " ", "changed", " ", "since", " ", "the", " ", 
-    "last", " ", 
-    RowBox[{"call", "!"}]}], " ", "*)"}]}], "\n", 
- RowBox[{
-  RowBox[{"lrf", "@", 
-   RowBox[{"SetDistanceCallbackPeriod", "[", "1000", "]"}]}], 
-  "\[IndentingNewLine]", "\[IndentingNewLine]", 
-  RowBox[{"(*", " ", 
+  RowBox[{"(*", 
    RowBox[{
    "Callback", " ", "function", " ", "for", " ", "distance", " ", "callback", 
     " ", 
     RowBox[{"(", 
-     RowBox[{"parameter", " ", "has", " ", "unit", " ", "cm"}], ")"}]}], " ", 
-   "*)"}]}], "\n", 
+     RowBox[{"parameter", " ", "has", " ", "unit", " ", "cm"}], ")"}]}], 
+   "*)"}]}], "\[IndentingNewLine]", 
  RowBox[{
   RowBox[{"DistanceCB", "[", 
    RowBox[{"sender_", ",", "distance_"}], "]"}], ":=", "\[IndentingNewLine]", 
@@ -97,26 +75,46 @@ Cell[BoxData[{
      RowBox[{"N", "[", 
       RowBox[{"Quantity", "[", 
        RowBox[{"distance", ",", "\"\<cm\>\""}], "]"}], "]"}], "]"}]}], 
-   "]"}]}], "\[IndentingNewLine]", 
+   "]"}]}], "\n", 
  RowBox[{
   RowBox[{"AddEventHandler", "[", 
    RowBox[{
     RowBox[{"lrf", "@", "Distance"}], ",", "DistanceCB"}], "]"}], 
-  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+  "\[IndentingNewLine]", "\n", 
+  RowBox[{"(*", 
+   RowBox[{
+   "Set", " ", "period", " ", "for", " ", "distance", " ", "callback", " ", 
+    "to", " ", "0.2", "s", " ", 
+    RowBox[{"(", 
+     RowBox[{"200", "ms"}], ")"}]}], "*)"}], "\[IndentingNewLine]", 
+  RowBox[{"(*", 
+   RowBox[{"Note", ":", 
+    RowBox[{
+    "The", " ", "distance", " ", "callback", " ", "is", " ", "only", " ", 
+     "called", " ", "every", " ", "0.2", " ", "seconds"}]}], "*)"}], 
+  "\[IndentingNewLine]", 
+  RowBox[{"(*", 
+   RowBox[{
+   "if", " ", "the", " ", "distance", " ", "has", " ", "changed", " ", 
+    "since", " ", "the", " ", "last", " ", 
+    RowBox[{"call", "!"}]}], "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"lrf", "@", 
+   RowBox[{"SetDistanceCallbackPeriod", "[", "200", "]"}]}], 
+  "\n"}], "\[IndentingNewLine]", 
  RowBox[{
   RowBox[{"Input", "[", "\"\<Click OK to exit\>\"", "]"}], 
   "\[IndentingNewLine]", "\[IndentingNewLine]", 
-  RowBox[{"(*", " ", 
-   RowBox[{"Clean", " ", "up"}], " ", "*)"}]}], "\[IndentingNewLine]", 
+  RowBox[{"(*", 
+   RowBox[{"Clean", " ", "up"}], "*)"}]}], "\n", 
  RowBox[{
   RowBox[{"lrf", "@", 
-   RowBox[{"DisableLaser", "[", "]"}]}], " ", 
-  RowBox[{"(*", " ", 
-   RowBox[{"Turn", " ", "laser", " ", "off"}], " ", 
-   "*)"}]}], "\[IndentingNewLine]", 
+   RowBox[{"DisableLaser", "[", "]"}]}], 
+  RowBox[{"(*", 
+   RowBox[{"Turn", " ", "laser", " ", "off"}], "*)"}]}], "\n", 
  RowBox[{"ipcon", "@", 
-  RowBox[{"Disconnect", "[", "]"}]}], "\[IndentingNewLine]", 
- RowBox[{"ReleaseNETObject", "[", "lrf", "]"}], "\[IndentingNewLine]", 
+  RowBox[{"Disconnect", "[", "]"}]}], "\n", 
+ RowBox[{"ReleaseNETObject", "[", "lrf", "]"}], "\n", 
  RowBox[{"ReleaseNETObject", "[", "ipcon", "]"}]}], "Input",
  CellChangeTimes->{{3.600075175574196*^9, 3.600075177574486*^9}, {
    3.600075518821967*^9, 3.60007554243471*^9}, {3.600075580562348*^9, 
@@ -142,10 +140,10 @@ Cell[BoxData[{
    3.600608760452553*^9}, {3.600608824736239*^9, 3.600608825481593*^9}, 
    3.60060918655473*^9, {3.600609227515625*^9, 3.600609227953993*^9}, {
    3.643695381755147*^9, 3.643695491342832*^9}, {3.6436955842894287`*^9, 
-   3.6436955847360487`*^9}}]
+   3.6436955847360487`*^9}, {3.65198954887956*^9, 3.6519895507795773`*^9}}]
 },
 WindowSize->{1521, 867},
-WindowMargins->{{333, 64}, {53, Automatic}},
+WindowMargins->{{332, 65}, {52, Automatic}},
 FrontEndVersion->"9.0 for Linux x86 (64-bit) (November 20, 2012)",
 StyleDefinitions->"Default.nb"
 ]
@@ -161,7 +159,7 @@ CellTagsIndex->{}
 (*NotebookFileOutline
 Notebook[{
 Cell[400, 13, 748, 13, 55, "Input"],
-Cell[1151, 28, 5350, 116, 671, "Input"]
+Cell[1151, 28, 5143, 114, 671, "Input"]
 }
 ]
 *)

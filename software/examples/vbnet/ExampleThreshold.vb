@@ -1,14 +1,15 @@
-Imports Tinkerforge
+Imports System
 Imports System.Threading
+Imports Tinkerforge
 
 Module ExampleThreshold
     Const HOST As String = "localhost"
     Const PORT As Integer = 4223
     Const UID As String = "XYZ" ' Change to your UID
 
-    ' Callback for distance greater than 20 cm
-    Sub ReachedCB(ByVal sender As BrickletLaserRangeFinder, ByVal distance As Integer)
-        System.Console.WriteLine("Distance " + distance.ToString() + " cm")
+    ' Callback subroutine for distance reached callback (parameter has unit cm)
+    Sub DistanceReachedCB(ByVal sender As BrickletLaserRangeFinder, ByVal distance As Integer)
+        Console.WriteLine("Distance: " + distance.ToString() + " cm")
     End Sub
 
     Sub Main()
@@ -25,14 +26,14 @@ Module ExampleThreshold
         ' Get threshold callbacks with a debounce time of 10 seconds (10000ms)
         lrf.SetDebouncePeriod(10000)
 
-        ' Register threshold reached callback to function ReachedCB
-        AddHandler lrf.DistanceReached, AddressOf ReachedCB
+        ' Register distance reached callback to subroutine DistanceReachedCB
+        AddHandler lrf.DistanceReached, AddressOf DistanceReachedCB
 
-        ' Configure threshold for "greater than 20 cm" (unit is cm)
+        ' Configure threshold for distance "greater than 20 cm" (unit is cm)
         lrf.SetDistanceCallbackThreshold(">"C, 20, 0)
 
-        System.Console.WriteLine("Press key to exit")
-        System.Console.ReadLine()
+        Console.WriteLine("Press key to exit")
+        Console.ReadLine()
         lrf.DisableLaser() ' Turn laser off
         ipcon.Disconnect()
     End Sub

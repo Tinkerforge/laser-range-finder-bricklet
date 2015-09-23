@@ -1,17 +1,22 @@
 #!/bin/sh
-# connects to localhost:4223 by default, use --host and --port to change it
+# Connects to localhost:4223 by default, use --host and --port to change this
 
-# change to your UID
-uid=XYZ
+uid=XYZ # Change to your UID
 
 # Turn laser on and wait 250ms for very first measurement to be ready
 tinkerforge call laser-range-finder-bricklet $uid enable-laser
-sleep 1
+sleep 0.25
 
-# set period for distance callback to 1s (1000ms)
-# note: the distance callback is only called every second if the
-#       distance has changed since the last call!
-tinkerforge call laser-range-finder-bricklet $uid set-distance-callback-period 1000
+# Handle incoming distance callbacks (parameter has unit cm)
+tinkerforge dispatch laser-range-finder-bricklet $uid distance &
 
-# handle incoming distance callbacks (unit is cm)
-tinkerforge dispatch laser-range-finder-bricklet $uid distance
+# Set period for distance callback to 0.2s (200ms)
+# Note: The distance callback is only called every 0.2 seconds
+#       if the distance has changed since the last call!
+tinkerforge call laser-range-finder-bricklet $uid set-distance-callback-period 200
+
+echo "Press key to exit"; read dummy
+
+tinkerforge call laser-range-finder-bricklet $uid disable-laser # Turn laser off
+
+kill -- -$$ # Stop callback dispatch in background

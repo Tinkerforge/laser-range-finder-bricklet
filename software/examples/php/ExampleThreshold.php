@@ -10,10 +10,10 @@ const HOST = 'localhost';
 const PORT = 4223;
 const UID = 'XYZ'; // Change to your UID
 
-// Callback for distance greater than 20 cm
-function cb_reached($distance)
+// Callback function for distance reached callback (parameter has unit cm)
+function cb_distanceReached($distance)
 {
-    echo "Distance: " . $distance . " cm\n";
+    echo "Distance: $distance cm\n";
 }
 
 $ipcon = new IPConnection(); // Create IP connection
@@ -29,10 +29,10 @@ usleep(250*1000);
 // Get threshold callbacks with a debounce time of 10 seconds (10000ms)
 $lrf->setDebouncePeriod(10000);
 
-// Register threshold reached callback to function cb_reached
-$lrf->registerCallback(BrickletLaserRangeFinder::CALLBACK_DISTANCE_REACHED, 'cb_reached');
+// Register distance reached callback to function cb_distanceReached
+$lrf->registerCallback(BrickletLaserRangeFinder::CALLBACK_DISTANCE_REACHED, 'cb_distanceReached');
 
-// Configure threshold for "greater than 20 cm"
+// Configure threshold for distance "greater than 20 cm" (unit is cm)
 $lrf->setDistanceCallbackThreshold('>', 20, 0);
 
 echo "Press ctrl+c to exit\n";

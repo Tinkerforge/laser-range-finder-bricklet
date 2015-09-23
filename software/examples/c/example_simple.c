@@ -32,7 +32,7 @@ int main(void) {
 	// Get current distance (unit is cm)
 	uint16_t distance;
 	if(laser_range_finder_get_distance(&lrf, &distance) < 0) {
-		fprintf(stderr, "Could not get value, probably timeout\n");
+		fprintf(stderr, "Could not get distance, probably timeout\n");
 		return 1;
 	}
 

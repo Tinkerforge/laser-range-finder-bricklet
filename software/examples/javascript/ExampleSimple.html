@@ -34,23 +34,24 @@
                 var lrf = new Tinkerforge.BrickletLaserRangeFinder(UID, ipcon); // Create device object
                 ipcon.connect(HOST, PORT,
                     function(error) {
-                        textArea.value += 'Error: '+error+ '\n';
+                        textArea.value += 'Error: ' + error + '\n';
                     }
                 ); // Connect to brickd
                 // Don't use device before ipcon is connected
 
                 ipcon.on(Tinkerforge.IPConnection.CALLBACK_CONNECTED,
-                    function(connectReason) {
+                    function (connectReason) {
                         // Turn laser on and wait 250ms for very first measurement to be ready
                         lrf.enableLaser();
-                        setTimeout(function() {
+
+                        setTimeout(function () {
                             // Get current distance (unit is cm)
                             lrf.getDistance(
-                                function(distance) {
-                                    textArea.value += 'Distance: '+distance+' cm\n';
+                                function (distance) {
+                                    textArea.value += 'Distance: ' + distance + ' cm\n';
                                 },
-                                function(error) {
-                                    textArea.value += 'Error: '+error+'\n';
+                                function (error) {
+                                    textArea.value += 'Error: ' + error + '\n';
                                 }
                             );
                         }, 250);

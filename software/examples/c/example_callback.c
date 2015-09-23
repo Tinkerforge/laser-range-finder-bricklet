@@ -36,16 +36,16 @@ int main(void) {
 	laser_range_finder_enable_laser(&lrf);
 	millisleep(250);
 
-	// Set Period for distance callback to 1s (1000ms)
-	// Note: The distance callback is only called every second if the
-	//       distance has changed since the last call!
-	laser_range_finder_set_distance_callback_period(&lrf, 1000);
-
 	// Register distance callback to function cb_distance
 	laser_range_finder_register_callback(&lrf,
 	                                     LASER_RANGE_FINDER_CALLBACK_DISTANCE,
 	                                     (void *)cb_distance,
 	                                     NULL);
+
+	// Set period for distance callback to 0.2s (200ms)
+	// Note: The distance callback is only called every 0.2 seconds
+	//       if the distance has changed since the last call!
+	laser_range_finder_set_distance_callback_period(&lrf, 200);
 
 	printf("Press key to exit\n");
 	getchar();

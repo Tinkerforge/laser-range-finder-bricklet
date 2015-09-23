@@ -1,30 +1,35 @@
 Needs["NETLink`"]
 LoadNETAssembly["Tinkerforge",NotebookDirectory[]<>"../../.."]
+
 host="localhost"
 port=4223
-uid="XYZ"(* Change to your UID *)
+uid="XYZ"(*Change to your UID*)
 
-(* Create IPConnection and device object *)
+(*Create IPConnection and device object*)
 ipcon=NETNew["Tinkerforge.IPConnection"]
 lrf=NETNew["Tinkerforge.BrickletLaserRangeFinder",uid,ipcon]
 ipcon@Connect[host,port]
 
-(* Get threshold callbacks with a debounce time of 10 seconds (10000ms) *)
+(*Turn laser on and wait 250ms for very first measurement to be ready*)
+lrf@EnableLaser[]
+Pause[0.25]
+
+(*Get threshold callbacks with a debounce time of 10 seconds (10000ms)*)
 lrf@SetDebouncePeriod[10000]
 
-(* Callback for distance greater than 20 cm *)
+(*Callback function for distance reached callback (parameter has unit cm)*)
 DistanceReachedCB[sender_,distance_]:=
-Print["Distance: "<>ToString[N[Quantity[distance,"cm"]]]]
+ Print["Distance: "<>ToString[N[Quantity[distance,"cm"]]]]
 AddEventHandler[lrf@DistanceReached,DistanceReachedCB]
 
-(* Configure threshold for "greater than 20 cm" (unit is cm) *)
+(*Configure threshold for distance "greater than 20 cm" (unit is cm)*)
 option=Tinkerforge`BrickletLaserRangeFinder`THRESHOLDUOPTIONUGREATER
 lrf@SetDistanceCallbackThreshold[option,20,0]
 
 Input["Click OK to exit"]
 
-(* Clean up *)
-lrf@DisableLaser[] (* Turn laser off *)
+(*Clean up*)
+lrf@DisableLaser[](*Turn laser off*)
 ipcon@Disconnect[]
 ReleaseNETObject[lrf]
 ReleaseNETObject[ipcon]

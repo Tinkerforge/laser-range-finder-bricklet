@@ -34,28 +34,30 @@
                 var lrf = new Tinkerforge.BrickletLaserRangeFinder(UID, ipcon); // Create device object
                 ipcon.connect(HOST, PORT,
                     function(error) {
-                        textArea.value += 'Error: '+error+ '\n';
+                        textArea.value += 'Error: ' + error + '\n';
                     }
                 ); // Connect to brickd
                 // Don't use device before ipcon is connected
 
                 ipcon.on(Tinkerforge.IPConnection.CALLBACK_CONNECTED,
-                    function(connectReason) {
+                    function (connectReason) {
                         // Turn laser on and wait 250ms for very first measurement to be ready
                         lrf.enableLaser();
-                        setTimeout(function() {
-                            // Set Period for distance callback to 1s (1000ms)
-                            // Note: The distance callback is only called every second if the
-                            // distance has changed since the last call!
-                            lrf.setDistanceCallbackPeriod(1000);
+
+                        setTimeout(function () {
+                            // Set period for distance callback to 0.2s (200ms)
+                            // Note: The distance callback is only called every 0.2 seconds
+                            //       if the distance has changed since the last call!
+                            lrf.setDistanceCallbackPeriod(200);
                         }, 250);
                     }
                 );
-                // Register position callback
+
+                // Register distance callback
                 lrf.on(Tinkerforge.BrickletLaserRangeFinder.CALLBACK_DISTANCE,
                     // Callback function for distance callback (parameter has unit cm)
-                    function(distance) {
-                        textArea.value += 'Distance: '+distance+' cm\n';
+                    function (distance) {
+                        textArea.value += 'Distance: ' + distance + ' cm\n';
                         textArea.scrollTop = textArea.scrollHeight;
                     }
                 );

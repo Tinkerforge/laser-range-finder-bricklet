@@ -3,10 +3,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[         0,          0]
-NotebookDataLength[      4466,        119]
-NotebookOptionsPosition[      4040,         98]
-NotebookOutlinePosition[      4372,        113]
-CellTagsIndexPosition[      4329,        110]
+NotebookDataLength[      5288,        129]
+NotebookOptionsPosition[      4862,        108]
+NotebookOutlinePosition[      5194,        123]
+CellTagsIndexPosition[      5151,        120]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -26,78 +26,88 @@ Cell[BoxData[{
    3.643694550421955*^9}, {3.643694628969799*^9, 3.643694633128633*^9}}],
 
 Cell[BoxData[{
- RowBox[{"host", "=", "\"\<localhost\>\""}], "\[IndentingNewLine]", 
- RowBox[{"port", "=", "4223"}], "\[IndentingNewLine]", 
+ RowBox[{"host", "=", "\"\<localhost\>\""}], "\n", 
+ RowBox[{"port", "=", "4223"}], "\n", 
  RowBox[{
   RowBox[{"uid", "=", "\"\<XYZ\>\""}], 
-  RowBox[{"(*", " ", 
-   RowBox[{"Change", " ", "to", " ", "your", " ", "UID"}], " ", "*)"}], 
-  "\[IndentingNewLine]", "\[IndentingNewLine]", 
-  RowBox[{"(*", " ", 
+  RowBox[{"(*", 
+   RowBox[{"Change", " ", "to", " ", "your", " ", "UID"}], "*)"}], "\n", 
+  "\[IndentingNewLine]", 
+  RowBox[{"(*", 
    RowBox[{
    "Create", " ", "IPConnection", " ", "and", " ", "device", " ", "object"}], 
-   " ", "*)"}]}], "\[IndentingNewLine]", 
+   "*)"}]}], "\[IndentingNewLine]", 
  RowBox[{"ipcon", "=", 
   RowBox[{"NETNew", "[", "\"\<Tinkerforge.IPConnection\>\"", "]"}]}], "\n", 
  RowBox[{"lrf", "=", 
   RowBox[{"NETNew", "[", 
    RowBox[{
    "\"\<Tinkerforge.BrickletLaserRangeFinder\>\"", ",", "uid", ",", "ipcon"}],
-    "]"}]}], "\[IndentingNewLine]", 
+    "]"}]}], "\n", 
  RowBox[{
   RowBox[{"ipcon", "@", 
    RowBox[{"Connect", "[", 
-    RowBox[{"host", ",", "port"}], "]"}]}], "\[IndentingNewLine]", 
-  "\[IndentingNewLine]", 
-  RowBox[{"(*", " ", 
+    RowBox[{"host", ",", "port"}], "]"}]}], "\n", "\[IndentingNewLine]", 
+  RowBox[{"(*", 
    RowBox[{
    "Turn", " ", "laser", " ", "on", " ", "and", " ", "wait", " ", "250", "ms",
      " ", "for", " ", "very", " ", "first", " ", "measurement", " ", "to", 
-    " ", "be", " ", "ready"}], " ", "*)"}]}], "\[IndentingNewLine]", 
+    " ", "be", " ", "ready"}], "*)"}]}], "\[IndentingNewLine]", 
  RowBox[{"lrf", "@", 
-  RowBox[{"EnableLaser", "[", "]"}]}], "\[IndentingNewLine]", 
+  RowBox[{"EnableLaser", "[", "]"}]}], "\n", 
  RowBox[{
-  RowBox[{"Pause", "[", "0.25", "]"}], "\[IndentingNewLine]", "\n", 
-  RowBox[{"(*", " ", 
+  RowBox[{"Pause", "[", "0.25", "]"}], "\n", "\[IndentingNewLine]", 
+  RowBox[{"(*", 
    RowBox[{"Get", " ", "current", " ", "distance", " ", 
     RowBox[{"(", 
-     RowBox[{"unit", " ", "is", " ", "cm"}], ")"}]}], " ", "*)"}]}], "\n", 
+     RowBox[{"unit", " ", "is", " ", "cm"}], ")"}]}], 
+   "*)"}]}], "\[IndentingNewLine]", 
  RowBox[{
   RowBox[{"Print", "[", 
-   RowBox[{"\"\<Illuminance: \>\"", "<>", 
+   RowBox[{"\"\<Distance: \>\"", "<>", 
     RowBox[{"ToString", "[", 
      RowBox[{"N", "[", 
       RowBox[{"Quantity", "[", 
        RowBox[{
         RowBox[{"lrf", "@", 
          RowBox[{"GetDistance", "[", "]"}]}], ",", "\"\<cm\>\""}], "]"}], 
-      "]"}], "]"}]}], "]"}], "\[IndentingNewLine]", "\[IndentingNewLine]", 
-  RowBox[{"(*", " ", 
-   RowBox[{"Clean", " ", "up"}], " ", "*)"}]}], "\[IndentingNewLine]", 
+      "]"}], "]"}]}], "]"}], "\n", "\[IndentingNewLine]", 
+  RowBox[{"(*", 
+   RowBox[{"Clean", " ", "up"}], "*)"}]}], "\[IndentingNewLine]", 
  RowBox[{
   RowBox[{"lrf", "@", 
-   RowBox[{"DisableLaser", "[", "]"}]}], " ", 
-  RowBox[{"(*", " ", 
-   RowBox[{"Turn", " ", "laser", " ", "off"}], " ", 
-   "*)"}]}], "\[IndentingNewLine]", 
+   RowBox[{"DisableLaser", "[", "]"}]}], 
+  RowBox[{"(*", 
+   RowBox[{"Turn", " ", "laser", " ", "off"}], "*)"}]}], "\n", 
  RowBox[{"ipcon", "@", 
-  RowBox[{"Disconnect", "[", "]"}]}], "\[IndentingNewLine]", 
- RowBox[{"ReleaseNETObject", "[", "lrf", "]"}], "\[IndentingNewLine]", 
+  RowBox[{"Disconnect", "[", "]"}]}], "\n", 
+ RowBox[{"ReleaseNETObject", "[", "lrf", "]"}], "\n", 
  RowBox[{"ReleaseNETObject", "[", "ipcon", "]"}]}], "Input",
- CellChangeTimes->CompressedData["
-1:eJwdzVsog3EYBvCl5Rw3DsuFwyIXi5yWzLJpapKxXGwLNc3pqw2LFhdcuTNh
-o/GZycpa7pbmGCvJhMghjJwu+cwuZKSQ7/lfvP3qqed5s3Q9De0RHA4ngz14
-qn0voc+ZygJdkRCOKW61MOflWAd3/iydsPpxqRfeK0X9kC+QWCE3MjAHi4PF
-DuhJTx6cZTW7+ogdE1fDxA+GqF93BhdYEzbW3uAjHR+G8wbmC6qszT/w+Zoi
-Fk67+U7k6fZs2M3jCmA4T5UPqWpGCP32b+LD/JAVGn3ySahOpWXb+C8L1EG5
-40QFi+6aNdA2MiLeZVVYTitgdziTc4i9dW0ipMdaU+DKbwwPRnWJbqgLtqdO
-uoWHki0GGpYvif7YzSk9KxPy2aEgGO2C1NOMG0q/B5ocrGKvtA2O56YZ4RBV
-TxSZak3wQNNCjJv5PIMLo/4r2CIOLR7lvFbapLQHPikavbDU7FiFZeZyH9TU
-aIii/ao9yHCVxH8MHRwL
-  "]]
+ CellChangeTimes->{{3.600075175574196*^9, 3.600075177574486*^9}, {
+   3.600075518821967*^9, 3.60007554243471*^9}, {3.600075580562348*^9, 
+   3.600075669308506*^9}, {3.600075705822371*^9, 3.600075921974015*^9}, {
+   3.6000760067507343`*^9, 3.600076009622583*^9}, {3.600077792659996*^9, 
+   3.600077795613958*^9}, {3.600077854705127*^9, 3.600077855342334*^9}, {
+   3.600090981053762*^9, 3.6000909897413397`*^9}, {3.600091048393783*^9, 
+   3.600091071325759*^9}, {3.6000911068928633`*^9, 3.6000911072763557`*^9}, {
+   3.600091413237206*^9, 3.600091428847453*^9}, {3.600091480127982*^9, 
+   3.60009150669311*^9}, {3.6000915673213387`*^9, 3.6000915678002653`*^9}, {
+   3.600092307925643*^9, 3.600092314241997*^9}, {3.600149020784099*^9, 
+   3.6001491107582273`*^9}, {3.600149174456699*^9, 3.6001491869018793`*^9}, {
+   3.600161252329417*^9, 3.600161270517737*^9}, {3.6001751050299597`*^9, 
+   3.6001752269913054`*^9}, {3.600175283111157*^9, 3.60017529631222*^9}, {
+   3.600500425825809*^9, 3.6005004326356916`*^9}, {3.6005005658827868`*^9, 
+   3.60050056667803*^9}, {3.600506021813815*^9, 3.6005060779666643`*^9}, {
+   3.600506152278829*^9, 3.6005061727773933`*^9}, {3.600607963780426*^9, 
+   3.6006080340220013`*^9}, {3.600608128817329*^9, 3.600608130481505*^9}, {
+   3.60060817038931*^9, 3.600608171010838*^9}, {3.60060891170606*^9, 
+   3.600608950204666*^9}, {3.64369437544487*^9, 3.643694468789134*^9}, {
+   3.643694498822006*^9, 3.643694516923244*^9}, {3.643694577860745*^9, 
+   3.643694578759075*^9}, {3.6436946341493196`*^9, 3.6436946345006*^9}, 
+   3.65198451755934*^9, 3.6519895381731043`*^9}]
 },
 WindowSize->{1521, 867},
-WindowMargins->{{334, 63}, {54, Automatic}},
+WindowMargins->{{332, 65}, {52, Automatic}},
 FrontEndVersion->"9.0 for Linux x86 (64-bit) (November 20, 2012)",
 StyleDefinitions->"Default.nb"
 ]
@@ -113,7 +123,7 @@ CellTagsIndex->{}
 (*NotebookFileOutline
 Notebook[{
 Cell[400, 13, 698, 12, 55, "Input"],
-Cell[1101, 27, 2935, 69, 473, "Input"]
+Cell[1101, 27, 3757, 79, 473, "Input"]
 }
 ]
 *)

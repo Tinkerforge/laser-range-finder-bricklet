@@ -12,7 +12,7 @@ type
     ipcon: TIPConnection;
     lrf: TBrickletLaserRangeFinder;
   public
-    procedure ReachedCB(sender: TBrickletLaserRangeFinder; const distance: word);
+    procedure DistanceReachedCB(sender: TBrickletLaserRangeFinder; const distance: word);
     procedure Execute;
   end;
 
@@ -24,8 +24,8 @@ const
 var
   e: TExample;
 
-{ Callback for distance greater than 20 cm }
-procedure TExample.ReachedCB(sender: TBrickletLaserRangeFinder; const distance: word);
+{ Callback procedure for distance reached callback (parameter has unit cm) }
+procedure TExample.DistanceReachedCB(sender: TBrickletLaserRangeFinder; const distance: word);
 begin
   WriteLn(Format('Distance: %d cm', [distance]));
 end;
@@ -49,10 +49,10 @@ begin
   { Get threshold callbacks with a debounce time of 10 seconds (10000ms) }
   lrf.SetDebouncePeriod(10000);
 
-  { Register threshold reached callback to procedure ReachedCB }
-  lrf.OnDistanceReached := {$ifdef FPC}@{$endif}ReachedCB;
+  { Register distance reached callback to procedure DistanceReachedCB }
+  lrf.OnDistanceReached := {$ifdef FPC}@{$endif}DistanceReachedCB;
 
-  { Configure threshold for "greater than 20 cm" }
+  { Configure threshold for distance "greater than 20 cm" (unit is cm) }
   lrf.SetDistanceCallbackThreshold('>', 20, 0);
 
   WriteLn('Press key to exit');

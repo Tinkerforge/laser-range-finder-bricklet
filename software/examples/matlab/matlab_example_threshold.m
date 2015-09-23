@@ -16,21 +16,21 @@ function matlab_example_threshold()
     lrf.enableLaser();
     pause(0.25);
 
-    % Set threshold callbacks with a debounce time of 10 seconds (10000ms)
+    % Get threshold callbacks with a debounce time of 10 seconds (10000ms)
     lrf.setDebouncePeriod(10000);
 
-    % Register threshold reached callback to function cb_reached
-    set(lrf, 'DistanceReachedCallback', @(h, e) cb_reached(e));
+    % Register distance reached callback to function cb_distance_reached
+    set(lrf, 'DistanceReachedCallback', @(h, e) cb_distance_reached(e));
 
-    % Configure threshold for "greater than 20 cm"
+    % Configure threshold for distance "greater than 20 cm" (unit is cm)
     lrf.setDistanceCallbackThreshold('>', 20, 0);
 
-    input('Press any key to exit...\n', 's');
+    input('Press key to exit\n', 's');
     lrf.disableLaser(); % Turn laser off
     ipcon.disconnect();
 end
 
-% Callback for distance greater than 20 cm
-function cb_reached(e)
-    fprintf('Distance: %g cm\n', e.distance);
+% Callback function for distance reached callback (parameter has unit cm)
+function cb_distance_reached(e)
+    fprintf('Distance: %i cm\n', e.distance);
 end

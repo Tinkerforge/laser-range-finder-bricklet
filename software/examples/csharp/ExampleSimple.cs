@@ -1,3 +1,5 @@
+using System;
+using System.Threading;
 using Tinkerforge;
 
 class Example
@@ -9,22 +11,22 @@ class Example
 	static void Main()
 	{
 		IPConnection ipcon = new IPConnection(); // Create IP connection
-		BrickletLaserRangeFinder lrf = new BrickletLaserRangeFinder(UID, ipcon); // Create device object
+		BrickletLaserRangeFinder lrf =
+		  new BrickletLaserRangeFinder(UID, ipcon); // Create device object
 
 		ipcon.Connect(HOST, PORT); // Connect to brickd
 		// Don't use device before ipcon is connected
 
 		// Turn laser on and wait 250ms for very first measurement to be ready
 		lrf.EnableLaser();
-		System.Threading.Thread.Sleep(250);
+		Thread.Sleep(250);
 
 		// Get current distance (unit is cm)
 		int distance = lrf.GetDistance();
+		Console.WriteLine("Distance: " + distance + " cm");
 
-		System.Console.WriteLine("Distance: " + distance + " cm");
-
-		System.Console.WriteLine("Press enter to exit");
-		System.Console.ReadLine();
+		Console.WriteLine("Press enter to exit");
+		Console.ReadLine();
 		lrf.DisableLaser(); // Turn laser off
 		ipcon.Disconnect();
 	}

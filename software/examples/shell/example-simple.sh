@@ -1,12 +1,13 @@
 #!/bin/sh
-# connects to localhost:4223 by default, use --host and --port to change it
+# Connects to localhost:4223 by default, use --host and --port to change this
 
-# change to your UID
-uid=XYZ
+uid=XYZ # Change to your UID
 
 # Turn laser on and wait 250ms for very first measurement to be ready
 tinkerforge call laser-range-finder-bricklet $uid enable-laser
-sleep 1
+sleep 0.25
 
-# get current distance (unit is cm/10)
+# Get current distance (unit is cm)
 tinkerforge call laser-range-finder-bricklet $uid get-distance
+
+tinkerforge call laser-range-finder-bricklet $uid disable-laser # Turn laser off

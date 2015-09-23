@@ -24,7 +24,7 @@ const
 var
   e: TExample;
 
-{ Callback function for distance callback (parameter has unit cm) }
+{ Callback procedure for distance callback (parameter has unit cm) }
 procedure TExample.DistanceCB(sender: TBrickletLaserRangeFinder; const distance: word);
 begin
   WriteLn(Format('Distance: %d cm', [distance]));
@@ -46,13 +46,13 @@ begin
   lrf.EnableLaser;
   Sleep(250);
 
-  { Set Period for distance callback to 1s (1000ms)
-    Note: The distance callback is only called every second if the
-          distance has changed since the last call! }
-  lrf.SetDistanceCallbackPeriod(1000);
-
   { Register distance callback to procedure DistanceCB }
   lrf.OnDistance := {$ifdef FPC}@{$endif}DistanceCB;
+
+  { Set period for distance callback to 0.2s (200ms)
+    Note: The distance callback is only called every 0.2 seconds
+          if the distance has changed since the last call! }
+  lrf.SetDistanceCallbackPeriod(200);
 
   WriteLn('Press key to exit');
   ReadLn;

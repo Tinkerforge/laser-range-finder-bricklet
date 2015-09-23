@@ -1,5 +1,6 @@
-Imports Tinkerforge
+Imports System
 Imports System.Threading
+Imports Tinkerforge
 
 Module ExampleSimple
     Const HOST As String = "localhost"
@@ -19,11 +20,10 @@ Module ExampleSimple
 
         ' Get current distance (unit is cm)
         Dim distance As Integer = lrf.GetDistance()
+        Console.WriteLine("Distance: " + distance.ToString() + " cm")
 
-        System.Console.WriteLine("Distance: " + distance.ToString() + " cm")
-
-        System.Console.WriteLine("Press key to exit")
-        System.Console.ReadLine()
+        Console.WriteLine("Press key to exit")
+        Console.ReadLine()
         lrf.DisableLaser() ' Turn laser off
         ipcon.Disconnect()
     End Sub

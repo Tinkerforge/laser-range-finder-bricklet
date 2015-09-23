@@ -21,7 +21,7 @@ select(undef, undef, undef, 0.25);
 my $distance = $lrf->get_distance();
 print "Distance: $distance cm\n";
 
-print "Press any key to exit...\n";
+print "Press key to exit\n";
 <STDIN>;
 $lrf->disable_laser(); # Turn laser off
 $ipcon->disconnect();

@@ -1,3 +1,5 @@
+using System;
+using System.Threading;
 using Tinkerforge;
 
 class Example
@@ -6,35 +8,36 @@ class Example
 	private static int PORT = 4223;
 	private static string UID = "XYZ"; // Change to your UID
 
-	// Callback for distance greater than 20 cm
-	static void ReachedCB(BrickletLaserRangeFinder sender, int distance)
+	// Callback function for distance reached callback (parameter has unit cm)
+	static void DistanceReachedCB(BrickletLaserRangeFinder sender, int distance)
 	{
-		System.Console.WriteLine("Distance: " + distance + " cm");
+		Console.WriteLine("Distance: " + distance + " cm");
 	}
 
 	static void Main()
 	{
 		IPConnection ipcon = new IPConnection(); // Create IP connection
-		BrickletLaserRangeFinder lrf = new BrickletLaserRangeFinder(UID, ipcon); // Create device object
+		BrickletLaserRangeFinder lrf =
+		  new BrickletLaserRangeFinder(UID, ipcon); // Create device object
 
 		ipcon.Connect(HOST, PORT); // Connect to brickd
 		// Don't use device before ipcon is connected
 
 		// Turn laser on and wait 250ms for very first measurement to be ready
 		lrf.EnableLaser();
-		System.Threading.Thread.Sleep(250);
+		Thread.Sleep(250);
 
 		// Get threshold callbacks with a debounce time of 10 seconds (10000ms)
 		lrf.SetDebouncePeriod(10000);
 
-		// Register threshold reached callback to function ReachedCB
-		lrf.DistanceReached += ReachedCB;
+		// Register distance reached callback to function DistanceReachedCB
+		lrf.DistanceReached += DistanceReachedCB;
 
-		// Configure threshold for "greater than 20 cm"
+		// Configure threshold for distance "greater than 20 cm" (unit is cm)
 		lrf.SetDistanceCallbackThreshold('>', 20, 0);
 
-		System.Console.WriteLine("Press enter to exit");
-		System.Console.ReadLine();
+		Console.WriteLine("Press enter to exit");
+		Console.ReadLine();
 		lrf.DisableLaser(); // Turn laser off
 		ipcon.Disconnect();
 	}

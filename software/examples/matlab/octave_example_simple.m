@@ -17,9 +17,9 @@ function octave_example_simple()
 
     % Get current distance (unit is cm)
     distance = lrf.getDistance();
-    fprintf("Distance: %g cm\n", distance);
+    fprintf("Distance: %d cm\n", distance);
 
-    input("Press any key to exit...\n", "s");
+    input("Press key to exit\n", "s");
     lrf.disableLaser(); % Turn laser off
     ipcon.disconnect();
 end
