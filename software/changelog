@@ -1,9 +1,9 @@
-2.0.0:
+2015-07-27: 2.0.0 (c75fddc)
 - Initial version
 
-2.0.1:
+2015-08-19: 2.0.1 (9578822)
 - Disable interrupts during I2C communication (fixes accidental incompatability
   with Servo Brick)
 
-2.0.2:
+2015-08-24: 2.0.2 (02c73fc)
 - Make sure interrupts are enabled after I2C communication in all cases
