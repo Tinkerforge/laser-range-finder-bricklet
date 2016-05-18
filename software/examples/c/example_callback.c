@@ -50,6 +50,7 @@ int main(void) {
 	printf("Press key to exit\n");
 	getchar();
 	laser_range_finder_disable_laser(&lrf); // Turn laser off
+	laser_range_finder_destroy(&lrf);
 	ipcon_destroy(&ipcon); // Calls ipcon_disconnect internally
 	return 0;
 }
