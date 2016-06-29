@@ -8,8 +8,7 @@ Module ExampleThreshold
     Const UID As String = "XYZ" ' Change to your UID
 
     ' Callback subroutine for distance reached callback (parameter has unit cm)
-    Sub DistanceReachedCB(ByVal sender As BrickletLaserRangeFinder, _
-                          ByVal distance As Integer)
+    Sub DistanceReachedCB(ByVal sender As BrickletLaserRangeFinder, ByVal distance As Integer)
         Console.WriteLine("Distance: " + distance.ToString() + " cm")
     End Sub
 
