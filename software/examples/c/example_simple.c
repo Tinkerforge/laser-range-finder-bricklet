@@ -7,7 +7,7 @@
 
 #define HOST "localhost"
 #define PORT 4223
-#define UID "XYZ" // Change to your UID
+#define UID "XYZ" // Change XYZ to the UID of your Laser Range Finder Bricklet
 
 int main(void) {
 	// Create IP connection

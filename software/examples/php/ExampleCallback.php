@@ -8,7 +8,7 @@ use Tinkerforge\BrickletLaserRangeFinder;
 
 const HOST = 'localhost';
 const PORT = 4223;
-const UID = 'XYZ'; // Change to your UID
+const UID = 'XYZ'; // Change XYZ to the UID of your Laser Range Finder Bricklet
 
 // Callback function for distance callback (parameter has unit cm)
 function cb_distance($distance)

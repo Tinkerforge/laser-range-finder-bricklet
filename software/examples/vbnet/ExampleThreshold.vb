@@ -5,10 +5,11 @@ Imports Tinkerforge
 Module ExampleThreshold
     Const HOST As String = "localhost"
     Const PORT As Integer = 4223
-    Const UID As String = "XYZ" ' Change to your UID
+    Const UID As String = "XYZ" ' Change XYZ to the UID of your Laser Range Finder Bricklet
 
     ' Callback subroutine for distance reached callback (parameter has unit cm)
-    Sub DistanceReachedCB(ByVal sender As BrickletLaserRangeFinder, ByVal distance As Integer)
+    Sub DistanceReachedCB(ByVal sender As BrickletLaserRangeFinder, _
+                          ByVal distance As Integer)
         Console.WriteLine("Distance: " + distance.ToString() + " cm")
     End Sub
 

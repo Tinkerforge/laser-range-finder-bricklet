@@ -5,7 +5,7 @@ use Tinkerforge::BrickletLaserRangeFinder;
 
 use constant HOST => 'localhost';
 use constant PORT => 4223;
-use constant UID => 'XYZ'; # Change to your UID
+use constant UID => 'XYZ'; # Change XYZ to the UID of your Laser Range Finder Bricklet
 
 # Callback subroutine for distance reached callback (parameter has unit cm)
 sub cb_distance_reached

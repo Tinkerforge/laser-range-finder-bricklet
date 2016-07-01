@@ -5,7 +5,7 @@ Imports Tinkerforge
 Module ExampleCallback
     Const HOST As String = "localhost"
     Const PORT As Integer = 4223
-    Const UID As String = "XYZ" ' Change to your UID
+    Const UID As String = "XYZ" ' Change XYZ to the UID of your Laser Range Finder Bricklet
 
     ' Callback subroutine for distance callback (parameter has unit cm)
     Sub DistanceCB(ByVal sender As BrickletLaserRangeFinder, ByVal distance As Integer)

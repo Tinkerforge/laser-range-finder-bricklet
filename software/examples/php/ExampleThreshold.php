@@ -8,7 +8,7 @@ use Tinkerforge\BrickletLaserRangeFinder;
 
 const HOST = 'localhost';
 const PORT = 4223;
-const UID = 'XYZ'; // Change to your UID
+const UID = 'XYZ'; // Change XYZ to the UID of your Laser Range Finder Bricklet
 
 // Callback function for distance reached callback (parameter has unit cm)
 function cb_distanceReached($distance)
@@ -30,7 +30,8 @@ usleep(250*1000);
 $lrf->setDebouncePeriod(10000);
 
 // Register distance reached callback to function cb_distanceReached
-$lrf->registerCallback(BrickletLaserRangeFinder::CALLBACK_DISTANCE_REACHED, 'cb_distanceReached');
+$lrf->registerCallback(BrickletLaserRangeFinder::CALLBACK_DISTANCE_REACHED,
+                       'cb_distanceReached');
 
 // Configure threshold for distance "greater than 20 cm" (unit is cm)
 $lrf->setDistanceCallbackThreshold('>', 20, 0);

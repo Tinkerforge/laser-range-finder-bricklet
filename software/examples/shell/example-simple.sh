@@ -1,7 +1,7 @@
 #!/bin/sh
 # Connects to localhost:4223 by default, use --host and --port to change this
 
-uid=XYZ # Change to your UID
+uid=XYZ # Change XYZ to the UID of your Laser Range Finder Bricklet
 
 # Turn laser on and wait 250ms for very first measurement to be ready
 tinkerforge call laser-range-finder-bricklet $uid enable-laser
