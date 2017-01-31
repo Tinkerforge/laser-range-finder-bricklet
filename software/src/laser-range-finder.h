@@ -48,6 +48,7 @@
 #define FID_VELOCITY 21
 #define FID_DISTANCE_REACHED 22
 #define FID_VELOCITY_REACHED 23
+#define FID_GET_SENSOR_HARDWARE_VERISON 24
 
 typedef struct {
 	MessageHeader header;
@@ -100,14 +101,24 @@ typedef struct {
 	bool laser_enabled;
 } __attribute__((__packed__)) IsLaserEnabledReturn;
 
+typedef struct {
+	MessageHeader header;
+} __attribute__((__packed__)) GetSensorHardwareVersion;
+
+typedef struct {
+	MessageHeader header;
+	uint8_t version;
+} __attribute__((__packed__)) GetSensorHardwareVersionReturn;
+
+
 void set_moving_average(const ComType com, const SetMovingAverage *data);
 void get_moving_average(const ComType com, const GetMovingAverage *data);
 void set_mode(const ComType com, const SetMode *data);
 void get_mode(const ComType com, const GetMode *data);
 void is_laser_enabled(const ComType com, const IsLaserEnabled *data);
+void get_sensor_hardware_version(const ComType com, const GetSensorHardwareVersion *data);
 
-void reinitialize_moving_average_distance(void);
-void reinitialize_moving_average_velocity(void);
+void reinitialize_moving_average(const uint8_t type);
 bool lidar_read_register(const uint8_t reg, const uint8_t length, uint8_t *data);
 bool lidar_write_register(const uint8_t reg, const uint8_t length, const uint8_t *data);
 
@@ -123,6 +134,7 @@ void i2c_start(void);
 uint8_t i2c_recv_byte(bool ack);
 bool i2c_send_byte(const uint8_t value);
 
+void update_moving_average(const uint8_t type, const uint8_t length);
 void new_distance_value(const uint16_t distance);
 void new_velocity_value(const int8_t velocity);
 
@@ -135,26 +147,31 @@ void tick(const uint8_t tick_type);
 #define CONTINOUS_RW                0x80
 
 // Internal Control Registers
-#define REG_CONTROL                 0x00
-#define REG_MODE_STATUS             0x01
-#define REG_MAX_AQUISITION_COUNT    0x02
-#define REG_CORRELATION_SETTING     0x03
-#define REG_AQUISATION_MODE_CONTROL 0x04
-#define REG_THRESHOLD_OFFSET        0x05
-#define REG_REFERENCE_DELAY         0x06 // + 0x07
-#define REG_REFERENCE_PEAK_VALUE    0x08
-#define REG_VELOCITY_MEASUREMENT    0x09
-#define REG_SIGNAL_DELAY            0x0A // + 0x0B
-#define REG_SIGNAL_PEAK_VALUE       0x0C
-#define REG_NOISE_FLOOR             0x0D
-#define REG_SIGNAL_STRENGTH         0x0E
-#define REG_DISTANCE                0x0F // + 0x10
-#define REG_DC_THRESHOLD            0x11
-#define REG_DELAY_ADD               0x12
-#define REG_DISTANCE_CALIBRATION    0x13
-#define REG_PREV_MEASURED_DISTANCE  0x14 // + 0x15
+#define REG_CONTROL                  0x00
+#define REG_MODE_STATUS              0x01
+#define REG_MAX_ACQUISITION_COUNT    0x02
+#define REG_CORRELATION_SETTING      0x03
+#define REG_ACQUISITION_MODE_CONTROL 0x04
+#define REG_THRESHOLD_OFFSET         0x05
+#define REG_REFERENCE_DELAY          0x06 // + 0x07
+#define REG_REFERENCE_PEAK_VALUE     0x08
+#define REG_VELOCITY_MEASUREMENT     0x09
+#define REG_SIGNAL_DELAY             0x0A // + 0x0B
+#define REG_SIGNAL_PEAK_VALUE        0x0C
+#define REG_NOISE_FLOOR              0x0D
+#define REG_SIGNAL_STRENGTH          0x0E
+#define REG_DISTANCE                 0x0F // + 0x10
+#define REG_DC_THRESHOLD             0x11
+#define REG_DELAY_ADD                0x12
+#define REG_DISTANCE_CALIBRATION     0x13
+#define REG_PREV_MEASURED_DISTANCE   0x14 // + 0x15
+#define REG_THRESHOLD_BYPASS         0x1C
 
 // External Control Registers
+#define REG_MEASURE_DELAY           0x45
 #define REG_VELOCITY_RESOLUTION     0x68
+
+#define LIDAR_VERSION_1 1
+#define LIDAR_VERSION_3 3
 
 #endif

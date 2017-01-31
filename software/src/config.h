@@ -31,7 +31,7 @@
 
 #define BRICKLET_FIRMWARE_VERSION_MAJOR 2
 #define BRICKLET_FIRMWARE_VERSION_MINOR 0
-#define BRICKLET_FIRMWARE_VERSION_REVISION 2
+#define BRICKLET_FIRMWARE_VERSION_REVISION 3
 
 #define BRICKLET_HARDWARE_VERSION_MAJOR 1
 #define BRICKLET_HARDWARE_VERSION_MINOR 0
@@ -54,6 +54,7 @@
 #define BRICKLET_NO_OFFSET
 #define INVOCATION_IN_BRICKLET_CODE
 #define NUM_SIMPLE_VALUES 2
+#define BRICKLET_HAS_NO_DESTRUCTOR
 
 #define MAX_MOVING_AVERAGE 30
 #define DEFAULT_MOVING_AVERAGE_DISTANCE 10
@@ -66,6 +67,8 @@ typedef enum {
 	MS_READ_DISTANCE,
 	MS_TAKE_VELOCITY_MEASUREMENT,
 	MS_READ_VELOCITY,
+	MS_V3_READ_DISTANCE,
+	MS_V3_READ_VELOCITY
 } MeasurementState;
 
 typedef struct {
@@ -83,22 +86,25 @@ typedef struct {
 	int32_t threshold_min_save[NUM_SIMPLE_VALUES];
 	int32_t threshold_max_save[NUM_SIMPLE_VALUES];
 
+	int32_t moving_average_sum[NUM_SIMPLE_VALUES];
 	uint32_t tick;
+
+	MeasurementState measurement_state;
+
+	int16_t moving_average_value[NUM_SIMPLE_VALUES][MAX_MOVING_AVERAGE];
 
 	char threshold_option_save[NUM_SIMPLE_VALUES];
 	char threshold_option[NUM_SIMPLE_VALUES];
 
-	int16_t moving_average_distance[MAX_MOVING_AVERAGE];
-	int16_t moving_average_velocity[MAX_MOVING_AVERAGE];
-	int32_t moving_average_sum[NUM_SIMPLE_VALUES];
 	uint8_t moving_average_tick[NUM_SIMPLE_VALUES];
 	uint8_t moving_average_upto[NUM_SIMPLE_VALUES];
 
 	uint8_t new_mode;
+	uint8_t next_measurement_state_counter;
+	uint8_t lidar_version;
+
 	bool update_mode;
 	bool laser_enabled;
-	MeasurementState measurement_state;
-	uint8_t next_measurement_state_counter;
 } BrickContext;
 
 #endif
