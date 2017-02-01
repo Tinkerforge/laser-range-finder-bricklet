@@ -49,6 +49,8 @@
 #define FID_DISTANCE_REACHED 22
 #define FID_VELOCITY_REACHED 23
 #define FID_GET_SENSOR_HARDWARE_VERISON 24
+#define FID_SET_CONFIGURATION 25
+#define FID_GET_CONFIGURATION 26
 
 typedef struct {
 	MessageHeader header;
@@ -110,6 +112,25 @@ typedef struct {
 	uint8_t version;
 } __attribute__((__packed__)) GetSensorHardwareVersionReturn;
 
+typedef struct {
+	MessageHeader header;
+	uint8_t acquisition_count;
+	bool enable_quick_termination;
+	uint8_t threshold_value;
+	uint16_t measurement_frequency;
+} __attribute__((__packed__)) SetConfiguration;
+
+typedef struct {
+	MessageHeader header;
+} __attribute__((__packed__)) GetConfiguration;
+
+typedef struct {
+	MessageHeader header;
+	uint8_t acquisition_count;
+	bool enable_quick_termination;
+	uint8_t threshold_value;
+	uint16_t measurement_frequency;
+} __attribute__((__packed__)) GetConfigurationReturn;
 
 void set_moving_average(const ComType com, const SetMovingAverage *data);
 void get_moving_average(const ComType com, const GetMovingAverage *data);
@@ -117,6 +138,8 @@ void set_mode(const ComType com, const SetMode *data);
 void get_mode(const ComType com, const GetMode *data);
 void is_laser_enabled(const ComType com, const IsLaserEnabled *data);
 void get_sensor_hardware_version(const ComType com, const GetSensorHardwareVersion *data);
+void set_configuration(const ComType com, const SetConfiguration *data);
+void get_configuration(const ComType com, const GetConfiguration *data);
 
 void reinitialize_moving_average(const uint8_t type);
 bool lidar_read_register(const uint8_t reg, const uint8_t length, uint8_t *data);

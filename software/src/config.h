@@ -92,6 +92,7 @@ typedef struct {
 	MeasurementState measurement_state;
 
 	int16_t moving_average_value[NUM_SIMPLE_VALUES][MAX_MOVING_AVERAGE];
+	uint16_t measurement_frequency;
 
 	char threshold_option_save[NUM_SIMPLE_VALUES];
 	char threshold_option[NUM_SIMPLE_VALUES];
@@ -102,7 +103,10 @@ typedef struct {
 	uint8_t new_mode;
 	uint8_t next_measurement_state_counter;
 	uint8_t lidar_version;
+	uint8_t acquisition_count;
+	uint8_t threshold_value;
 
+	bool enable_quick_termination;
 	bool update_mode;
 	bool laser_enabled;
 } BrickContext;

@@ -65,7 +65,7 @@ void invocation(const ComType com, const uint8_t *data) {
 	BrickContext *bc = BC;
 	BrickletAPI  *ba = BA;
 
-	uint32_t ret_data[4]; // Biggest packet has 10 bytes
+	uint32_t ret_data[4]; // Biggest packet has 15 bytes
 	*((MessageHeader*)ret_data) = *((MessageHeader*)data);
 	((MessageHeader*)ret_data)->length = 0;
 
@@ -102,8 +102,7 @@ void invocation(const ComType com, const uint8_t *data) {
 		}
 
 		case FID_SET_MODE: {
-			if((bc->lidar_version == LIDAR_VERSION_1 && ((SetMode*)data)->mode > 4) ||
-			   (bc->lidar_version == LIDAR_VERSION_3 && (((SetMode*)data)->mode < 5 || ((SetMode*)data)->mode > 10))) {
+			if((bc->lidar_version == LIDAR_VERSION_3 || ((SetMode*)data)->mode > 4)) {
 				ba->com_return_error(data, sizeof(MessageHeader), MESSAGE_ERROR_CODE_INVALID_PARAMETER, com);
 				return;
 			}
@@ -138,6 +137,33 @@ void invocation(const ComType com, const uint8_t *data) {
 		case FID_GET_SENSOR_HARDWARE_VERISON: {
 			((GetSensorHardwareVersionReturn*)ret_data)->header.length = sizeof(GetSensorHardwareVersionReturn);
 			((GetSensorHardwareVersionReturn*)ret_data)->version = bc->lidar_version;
+			break;
+		}
+
+		case FID_SET_CONFIGURATION: {
+			if((bc->lidar_version == LIDAR_VERSION_1) ||
+			   (((SetConfiguration*)data)->acquisition_count < 1) ||
+			   ((((SetConfiguration*)data)->measurement_frequency != 0) && (((SetConfiguration*)data)->measurement_frequency < 10)) ||
+			   (((SetConfiguration*)data)->measurement_frequency > 500)) {
+				ba->com_return_error(data, sizeof(MessageHeader), MESSAGE_ERROR_CODE_INVALID_PARAMETER, com);
+				return;
+			}
+
+			bc->acquisition_count        = ((SetConfiguration*)data)->acquisition_count;
+			bc->enable_quick_termination = ((SetConfiguration*)data)->enable_quick_termination;
+			bc->threshold_value          = ((SetConfiguration*)data)->threshold_value;
+			bc->measurement_frequency    = ((SetConfiguration*)data)->measurement_frequency;
+			bc->update_mode = true;
+
+			break;
+		}
+
+		case FID_GET_CONFIGURATION: {
+			((GetConfigurationReturn*)ret_data)->header.length            = sizeof(GetConfigurationReturn);
+			((GetConfigurationReturn*)ret_data)->acquisition_count        = bc->acquisition_count;
+			((GetConfigurationReturn*)ret_data)->enable_quick_termination = bc->enable_quick_termination;
+			((GetConfigurationReturn*)ret_data)->threshold_value          = bc->threshold_value;
+			((GetConfigurationReturn*)ret_data)->measurement_frequency    = bc->measurement_frequency;
 			break;
 		}
 
@@ -184,6 +210,10 @@ void constructor(void) {
 	bc->laser_enabled = false;
 	bc->moving_average_upto[SIMPLE_UNIT_DISTANCE] = DEFAULT_MOVING_AVERAGE_DISTANCE;
 	bc->moving_average_upto[SIMPLE_UNIT_VELOCITY] = DEFAULT_MOVING_AVERAGE_VELOCITY;
+	bc->acquisition_count = 0x80;
+	bc->enable_quick_termination = false;
+	bc->threshold_value = 0;
+	bc->measurement_frequency = 0;
 	reinitialize_moving_average(SIMPLE_UNIT_DISTANCE);
 	reinitialize_moving_average(SIMPLE_UNIT_VELOCITY);
 
@@ -195,7 +225,7 @@ void constructor(void) {
 	lidar_write_register(REG_CONTROL, 1, &data);
 	SLEEP_MS(200);
 
-	// After reset we read the acquisition mode, since it has a different default
+	// After reset we read the acquisition mode. It has a different default
 	// value in v1 and v3
 	lidar_read_register(REG_ACQUISITION_MODE_CONTROL, 1, &data);
 	if(data == 0) {
@@ -237,32 +267,27 @@ void tick(const uint8_t tick_type) {
 					}
 
 					case MS_UPDATE_MODE: {
+						bool write_ok = false;
 						if(bc->new_mode == 0) {
 							uint8_t data = 0;
-							if(lidar_write_register(REG_ACQUISITION_MODE_CONTROL, 1, &data)) {
-								bc->update_mode = false;
-								if(bc->laser_enabled) {
-									bc->measurement_state = MS_START_ACQUISITION;
-								} else {
-									bc->measurement_state = MS_DISABLED;
-								};
-							}
+							write_ok = lidar_write_register(REG_ACQUISITION_MODE_CONTROL, 1, &data);
 						} else {
 							uint8_t velocity_resolution_value = 0xC8;
-							switch(BC->new_mode) {
+							switch(bc->new_mode) {
 								case 1: velocity_resolution_value = 0xC8; break;
 								case 2: velocity_resolution_value = 0x50; break;
 								case 3: velocity_resolution_value = 0x28; break;
 								case 4: velocity_resolution_value = 0x14; break;
 							}
+							write_ok = lidar_write_register(REG_VELOCITY_RESOLUTION, 1, &velocity_resolution_value);
+						}
 
-							if(lidar_write_register(REG_VELOCITY_RESOLUTION, 1, &velocity_resolution_value)) {
-								bc->update_mode = false;
-								if(bc->laser_enabled) {
-									bc->measurement_state = MS_START_ACQUISITION;
-								} else {
-									bc->measurement_state = MS_DISABLED;
-								}
+						if(write_ok) {
+							bc->update_mode = false;
+							if(bc->laser_enabled) {
+								bc->measurement_state = MS_START_ACQUISITION;
+							} else {
+								bc->measurement_state = MS_DISABLED;
 							}
 						}
 
@@ -296,7 +321,7 @@ void tick(const uint8_t tick_type) {
 								new_distance_value(distance);
 								new_velocity_value(0);
 							}
-							BC->measurement_state = MS_START_ACQUISITION;
+							bc->measurement_state = MS_START_ACQUISITION;
 						}
 
 						break;
@@ -331,22 +356,21 @@ void tick(const uint8_t tick_type) {
 			}
 		} else {
 			if(bc->update_mode) {
-				uint8_t acq_max_value = 0x80;
-				uint8_t acq_mode_value = 0x08;
-				uint8_t threshold_bypass_value = 0x00;
-
-				switch(bc->new_mode) {
-					case 5:                                 break;
-					case 6:  acq_max_value          = 0x1D; break;
-					case 7:  acq_mode_value         = 0x00; break;
-					case 8:  acq_max_value          = 0xFF; break;
-					case 9:  threshold_bypass_value = 0x80; break;
-					case 10: threshold_bypass_value = 0xB0; break;
+				uint8_t acq_max_value = bc->acquisition_count;
+				uint8_t acq_mode_value = 0;
+				if(!bc->enable_quick_termination) {
+					acq_mode_value |= (1 << 3);
 				}
+				if(bc->measurement_frequency != 0) {
+					acq_mode_value |= (1 << 5);
+				}
+				uint8_t threshold_bypass_value = bc->threshold_value;
+				uint8_t measure_delay = 2000/bc->measurement_frequency;
 
 				lidar_write_register(REG_MAX_ACQUISITION_COUNT,    1, &acq_max_value);
 				lidar_write_register(REG_ACQUISITION_MODE_CONTROL, 1, &acq_mode_value);
 				lidar_write_register(REG_THRESHOLD_BYPASS,         1, &threshold_bypass_value);
+				lidar_write_register(REG_MEASURE_DELAY,            1, &measure_delay);
 				bc->update_mode = false;
 			} else {
 				if(bc->laser_enabled) {
@@ -445,43 +469,47 @@ bool lidar_write_register(const uint8_t reg, const uint8_t length, const uint8_t
 	return true;
 }
 
-void new_value(const int32_t value, const uint8_t type) {
+int32_t new_value(const int32_t value, const uint8_t type) {
 	BrickContext *bc = BC;
 	bc->moving_average_sum[type] = bc->moving_average_sum[type] -
 	                               bc->moving_average_value[type][bc->moving_average_tick[type]] +
 								   value;
 
-	bc->moving_average_value[type][BC->moving_average_tick[type]] = value;
+	bc->moving_average_value[type][bc->moving_average_tick[type]] = value;
 	bc->moving_average_tick[type] = (bc->moving_average_tick[type] + 1) % bc->moving_average_upto[type];
 
 	bc->last_value[type] = bc->value[type];
+
+	return (bc->moving_average_sum[type] + bc->moving_average_upto[type]/2)/bc->moving_average_upto[type];
 }
 
 void new_velocity_value(const int8_t velocity) {
 	BrickContext *bc = BC;
 
 	int16_t scaled_velocity = velocity*10; // default = *10
-	switch(bc->new_mode) {
-		case 1: scaled_velocity = velocity*10; break;
-		case 2: scaled_velocity = velocity*25; break;
-		case 3: scaled_velocity = velocity*50; break;
-		case 4: scaled_velocity = velocity*100; break;
+	if(bc->lidar_version == 1) {
+		switch(bc->new_mode) {
+			case 1: scaled_velocity = velocity*10; break;
+			case 2: scaled_velocity = velocity*25; break;
+			case 3: scaled_velocity = velocity*50; break;
+			case 4: scaled_velocity = velocity*100; break;
+		}
+	} else {
+		if(bc->measurement_frequency > 0) {
+			scaled_velocity = velocity * bc->measurement_frequency;
+		}
 	}
 
-	new_value(scaled_velocity, SIMPLE_UNIT_VELOCITY);
-	int16_t new_value = (bc->moving_average_sum[SIMPLE_UNIT_VELOCITY] + bc->moving_average_upto[SIMPLE_UNIT_VELOCITY]/2)/bc->moving_average_upto[SIMPLE_UNIT_VELOCITY];
-	if(ABS(new_value) < 9) {
-		new_value = 0;
+	int16_t value = new_value(scaled_velocity, SIMPLE_UNIT_VELOCITY);
+	if(ABS(value) < 9) {
+		value = 0;
 	}
 
-	bc->value[SIMPLE_UNIT_VELOCITY] = new_value;
+	bc->value[SIMPLE_UNIT_VELOCITY] = value;
 }
 
 void new_distance_value(const uint16_t distance) {
-	BrickContext *bc = BC;
-
-	new_value(distance, SIMPLE_UNIT_DISTANCE);
-	bc->value[SIMPLE_UNIT_DISTANCE] =  (bc->moving_average_sum[SIMPLE_UNIT_DISTANCE] + bc->moving_average_upto[SIMPLE_UNIT_DISTANCE]/2)/bc->moving_average_upto[SIMPLE_UNIT_DISTANCE];
+	BC->value[SIMPLE_UNIT_DISTANCE] = new_value(distance, SIMPLE_UNIT_DISTANCE);
 }
 
 void reinitialize_moving_average(const uint8_t type) {
