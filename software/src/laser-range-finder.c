@@ -245,6 +245,19 @@ void constructor(void) {
 	}
 }
 
+bool read_distance(void) {
+	uint8_t data[2];
+	if(lidar_read_register(REG_DISTANCE, 2, data)) {
+		const uint16_t distance = (data[0] << 8) | data[1];
+		if((distance & (1 << 15)) != (1 << 15)) { // If the MSB is 1 then the reading is not considered valid
+			new_distance_value(distance);
+		}
+		return true;
+	}
+
+	return false;
+}
+
 void tick(const uint8_t tick_type) {
 	BrickContext *bc = BC;
 
@@ -314,13 +327,8 @@ void tick(const uint8_t tick_type) {
 					}
 
 					case MS_READ_DISTANCE: {
-						uint8_t data[2];
-						if(lidar_read_register(REG_DISTANCE, 2, data)) {
-							const uint16_t distance = (data[0] << 8) | data[1];
-							if((distance & (1 << 15)) != (1 << 15)) { // If the MSB is 1 then the reading is not considered valid
-								new_distance_value(distance);
-								new_velocity_value(0);
-							}
+						if(read_distance()) {
+							new_velocity_value(0);
 							bc->measurement_state = MS_START_ACQUISITION;
 						}
 
@@ -376,12 +384,7 @@ void tick(const uint8_t tick_type) {
 				if(bc->laser_enabled) {
 					switch(bc->measurement_state) {
 						case MS_V3_READ_DISTANCE: {
-							uint8_t data[2];
-							if(lidar_read_register(REG_DISTANCE, 2, data)) {
-								const uint16_t distance = (data[0] << 8) | data[1];
-								if((distance & (1 << 15)) != (1 << 15)) { // If the MSB is 1 then the reading is not considered valid
-									new_distance_value(distance);
-								}
+							if(read_distance()) {
 								bc->measurement_state = MS_V3_READ_VELOCITY;
 							}
 
