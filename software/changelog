@@ -7,3 +7,6 @@
 
 2015-08-24: 2.0.2 (02c73fc)
 - Make sure interrupts are enabled after I2C communication in all cases
+
+2017-02.03: 2.0.3 ()
+- Add support and API for LIDAR-Lite V3 sensor
