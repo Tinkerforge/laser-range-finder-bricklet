@@ -28,7 +28,7 @@ class Example
 		Thread.Sleep(250);
 
 		// Register distance callback to function DistanceCB
-		lrf.Distance += DistanceCB;
+		lrf.DistanceCallback += DistanceCB;
 
 		// Set period for distance callback to 0.2s (200ms)
 		// Note: The distance callback is only called every 0.2 seconds

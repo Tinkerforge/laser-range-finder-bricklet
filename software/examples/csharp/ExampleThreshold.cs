@@ -31,7 +31,7 @@ class Example
 		lrf.SetDebouncePeriod(10000);
 
 		// Register distance reached callback to function DistanceReachedCB
-		lrf.DistanceReached += DistanceReachedCB;
+		lrf.DistanceReachedCallback += DistanceReachedCB;
 
 		// Configure threshold for distance "greater than 20 cm" (unit is cm)
 		lrf.SetDistanceCallbackThreshold('>', 20, 0);
