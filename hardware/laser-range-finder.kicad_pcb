@@ -1,15 +1,15 @@
-(kicad_pcb (version 4) (host pcbnew "(2015-03-18 BZR 5525)-product")
+(kicad_pcb (version 4) (host pcbnew 4.0.2+dfsg1-stable)
 
   (general
     (links 38)
     (no_connects 0)
-    (area 110.259499 85.264659 283.37085 164.36563)
+    (area 110.219659 85.264659 283.37085 164.36563)
     (thickness 1.6002)
     (drawings 35)
     (tracks 200)
     (zones 0)
-    (modules 20)
-    (nets 12)
+    (modules 21)
+    (nets 15)
   )
 
   (page A4)
