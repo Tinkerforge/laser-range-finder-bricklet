@@ -1,4 +1,5 @@
 EESchema Schematic File Version 2
+LIBS:tinkerforge
 LIBS:power
 LIBS:device
 LIBS:transistors
@@ -10,7 +11,6 @@ LIBS:cmos4000
 LIBS:adc-dac
 LIBS:memory
 LIBS:xilinx
-LIBS:special
 LIBS:microcontrollers
 LIBS:dsp
 LIBS:microchip
@@ -29,7 +29,6 @@ LIBS:opto
 LIBS:atmel
 LIBS:contrib
 LIBS:valves
-LIBS:tinkerforge
 EELAYER 25 0
 EELAYER END
 $Descr A4 11693 8268
@@ -110,7 +109,7 @@ U 1 1 4CF77E04
 P 3950 4550
 F 0 "C1" V 3800 4550 50  0000 L CNN
 F 1 "100nF" V 4100 4550 50  0000 L CNN
-F 2 "kicad-libraries:0603" H 3950 4550 60  0001 C CNN
+F 2 "kicad-libraries:C0603" H 3950 4550 60  0001 C CNN
 F 3 "" H 3950 4550 60  0001 C CNN
 	1    3950 4550
 	0    1    1    0   
@@ -165,7 +164,7 @@ U 1 1 4C653F82
 P 7000 4100
 F 0 "C2" H 7050 4200 50  0000 L CNN
 F 1 "1µF" H 7050 4000 50  0000 L CNN
-F 2 "kicad-libraries:0603" H 7000 4100 60  0001 C CNN
+F 2 "kicad-libraries:C0603" H 7000 4100 60  0001 C CNN
 F 3 "" H 7000 4100 60  0001 C CNN
 	1    7000 4100
 	1    0    0    -1  
@@ -268,7 +267,7 @@ U 1 1 54FD66AB
 P 7600 4100
 F 0 "C3" H 7650 4200 50  0000 L CNN
 F 1 "1µF" H 7650 4000 50  0000 L CNN
-F 2 "kicad-libraries:0603" H 7600 4100 60  0001 C CNN
+F 2 "kicad-libraries:C0603" H 7600 4100 60  0001 C CNN
 F 3 "" H 7600 4100 60  0001 C CNN
 	1    7600 4100
 	1    0    0    -1  
@@ -290,10 +289,10 @@ U 1 1 54FD66C3
 P 7300 3850
 F 0 "L1" V 7250 3850 40  0000 C CNN
 F 1 "FB-2" V 7400 3850 40  0000 C CNN
-F 2 "kicad-libraries:0603" H 7300 3850 60  0001 C CNN
+F 2 "kicad-libraries:C0603" H 7300 3850 60  0001 C CNN
 F 3 "~" H 7300 3850 60  0000 C CNN
 	1    7300 3850
-	0    -1   -1   0   
+	1    0    0    -1  
 $EndComp
 Wire Wire Line
 	7000 3900 7000 3750
@@ -395,7 +394,7 @@ U 1 1 550BFCB0
 P 4800 3600
 F 0 "R1" V 4880 3600 50  0000 C CNN
 F 1 "10k" V 4800 3600 50  0000 C CNN
-F 2 "kicad-libraries:0603" H 4800 3600 60  0001 C CNN
+F 2 "kicad-libraries:R0603" H 4800 3600 60  0001 C CNN
 F 3 "" H 4800 3600 60  0000 C CNN
 	1    4800 3600
 	1    0    0    -1  
