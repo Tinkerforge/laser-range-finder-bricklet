@@ -24,7 +24,7 @@ Module ExampleCallback
         Thread.Sleep(250)
 
         ' Register distance callback to subroutine DistanceCB
-        AddHandler lrf.Distance, AddressOf DistanceCB
+        AddHandler lrf.DistanceCallback, AddressOf DistanceCB
 
         ' Set period for distance callback to 0.2s (200ms)
         ' Note: The distance callback is only called every 0.2 seconds

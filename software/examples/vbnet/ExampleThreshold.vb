@@ -28,7 +28,7 @@ Module ExampleThreshold
         lrf.SetDebouncePeriod(10000)
 
         ' Register distance reached callback to subroutine DistanceReachedCB
-        AddHandler lrf.DistanceReached, AddressOf DistanceReachedCB
+        AddHandler lrf.DistanceReachedCallback, AddressOf DistanceReachedCB
 
         ' Configure threshold for distance "greater than 20 cm" (unit is cm)
         lrf.SetDistanceCallbackThreshold(">"C, 20, 0)
