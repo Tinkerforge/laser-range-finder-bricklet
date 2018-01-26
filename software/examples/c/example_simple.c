@@ -1,6 +1,6 @@
-#include <stdio.h>
-
 #define IPCON_EXPOSE_MILLISLEEP
+
+#include <stdio.h>
 
 #include "ip_connection.h"
 #include "bricklet_laser_range_finder.h"
@@ -36,7 +36,7 @@ int main(void) {
 		return 1;
 	}
 
-	printf("Distance: %d cm\n", distance);
+	printf("Distance: %u cm\n", distance);
 
 	printf("Press key to exit\n");
 	getchar();

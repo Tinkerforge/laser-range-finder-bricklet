@@ -1,6 +1,6 @@
-#include <stdio.h>
-
 #define IPCON_EXPOSE_MILLISLEEP
+
+#include <stdio.h>
 
 #include "ip_connection.h"
 #include "bricklet_laser_range_finder.h"
@@ -13,7 +13,7 @@
 void cb_distance(uint16_t distance, void *user_data) {
 	(void)user_data; // avoid unused parameter warning
 
-	printf("Distance: %d cm\n", distance);
+	printf("Distance: %u cm\n", distance);
 }
 
 int main(void) {
