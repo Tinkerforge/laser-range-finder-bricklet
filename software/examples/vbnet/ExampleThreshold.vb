@@ -7,7 +7,7 @@ Module ExampleThreshold
     Const PORT As Integer = 4223
     Const UID As String = "XYZ" ' Change XYZ to the UID of your Laser Range Finder Bricklet
 
-    ' Callback subroutine for distance reached callback (parameter has unit cm)
+    ' Callback subroutine for distance reached callback
     Sub DistanceReachedCB(ByVal sender As BrickletLaserRangeFinder, _
                           ByVal distance As Integer)
         Console.WriteLine("Distance: " + distance.ToString() + " cm")
@@ -30,7 +30,7 @@ Module ExampleThreshold
         ' Register distance reached callback to subroutine DistanceReachedCB
         AddHandler lrf.DistanceReachedCallback, AddressOf DistanceReachedCB
 
-        ' Configure threshold for distance "greater than 20 cm" (unit is cm)
+        ' Configure threshold for distance "greater than 20 cm"
         lrf.SetDistanceCallbackThreshold(">"C, 20, 0)
 
         Console.WriteLine("Press key to exit")

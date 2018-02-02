@@ -14,7 +14,7 @@ ipcon@Connect[host,port]
 lrf@EnableLaser[]
 Pause[0.25]
 
-(*Get current distance (unit is cm)*)
+(*Get current distance*)
 Print["Distance: "<>ToString[N[Quantity[lrf@GetDistance[],"cm"]]]]
 
 (*Clean up*)

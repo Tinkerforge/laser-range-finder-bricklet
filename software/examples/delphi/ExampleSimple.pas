@@ -40,7 +40,7 @@ begin
   lrf.EnableLaser;
   Sleep(250);
 
-  { Get current distance (unit is cm) }
+  { Get current distance }
   distance := lrf.GetDistance;
   WriteLn(Format('Distance: %d cm', [distance]));
 

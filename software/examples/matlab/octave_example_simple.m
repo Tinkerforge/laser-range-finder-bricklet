@@ -15,7 +15,7 @@ function octave_example_simple()
     lrf.enableLaser();
     pause(0.25);
 
-    % Get current distance (unit is cm)
+    % Get current distance
     distance = lrf.getDistance();
     fprintf("Distance: %d cm\n", distance);
 

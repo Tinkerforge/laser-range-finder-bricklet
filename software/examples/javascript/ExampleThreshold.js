@@ -23,7 +23,7 @@ ipcon.on(Tinkerforge.IPConnection.CALLBACK_CONNECTED,
             // Get threshold callbacks with a debounce time of 10 seconds (10000ms)
             lrf.setDebouncePeriod(10000);
 
-            // Configure threshold for distance "greater than 20 cm" (unit is cm)
+            // Configure threshold for distance "greater than 20 cm"
             lrf.setDistanceCallbackThreshold('>', 20, 0);
         }, 250);
     }
@@ -31,7 +31,7 @@ ipcon.on(Tinkerforge.IPConnection.CALLBACK_CONNECTED,
 
 // Register distance reached callback
 lrf.on(Tinkerforge.BrickletLaserRangeFinder.CALLBACK_DISTANCE_REACHED,
-    // Callback function for distance reached callback (parameter has unit cm)
+    // Callback function for distance reached callback
     function (distance) {
         console.log('Distance: ' + distance + ' cm');
     }

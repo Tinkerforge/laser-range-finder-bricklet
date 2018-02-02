@@ -10,7 +10,7 @@ import time
 from tinkerforge.ip_connection import IPConnection
 from tinkerforge.bricklet_laser_range_finder import BrickletLaserRangeFinder
 
-# Callback function for distance callback (parameter has unit cm)
+# Callback function for distance callback
 def cb_distance(distance):
     print("Distance: " + str(distance) + " cm")
 

@@ -29,7 +29,7 @@ function matlab_example_callback()
     ipcon.disconnect();
 end
 
-% Callback function for distance callback (parameter has unit cm)
+% Callback function for distance callback
 function cb_distance(e)
     fprintf('Distance: %i cm\n', e.distance);
 end

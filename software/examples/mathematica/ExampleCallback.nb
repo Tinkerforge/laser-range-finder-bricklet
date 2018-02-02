@@ -23,7 +23,7 @@ Notebook[{
    RowBox[{"Pause", "[", "0.25", "]"}],
    RowBox[{"
 "}],
-   RowBox[{"(*", "Callback function for distance callback (parameter has unit cm)", "*)"}],
+   RowBox[{"(*", "Callback function for distance callback", "*)"}],
    RowBox[{RowBox[{"DistanceCB", "[", RowBox[{"sender_", ",", "distance_"}], "]"}], ":=", "\[IndentingNewLine]", RowBox[{"Print", "[", RowBox[{"\"\<Distance: \>\"", "<>", RowBox[{"ToString", "[", RowBox[{"N", "[", RowBox[{"Quantity", "[", RowBox[{"distance", ",", "\"\<cm\>\""}], "]"}], "]"}], "]"}]}], "]"}]}],
    RowBox[{"AddEventHandler", "[", RowBox[{RowBox[{"lrf", "@", "DistanceCallback"}], ",", "DistanceCB"}], "]"}],
    RowBox[{"

@@ -10,7 +10,7 @@ const HOST = 'localhost';
 const PORT = 4223;
 const UID = 'XYZ'; // Change XYZ to the UID of your Laser Range Finder Bricklet
 
-// Callback function for distance reached callback (parameter has unit cm)
+// Callback function for distance reached callback
 function cb_distanceReached($distance)
 {
     echo "Distance: $distance cm\n";
@@ -33,7 +33,7 @@ $lrf->setDebouncePeriod(10000);
 $lrf->registerCallback(BrickletLaserRangeFinder::CALLBACK_DISTANCE_REACHED,
                        'cb_distanceReached');
 
-// Configure threshold for distance "greater than 20 cm" (unit is cm)
+// Configure threshold for distance "greater than 20 cm"
 $lrf->setDistanceCallbackThreshold('>', 20, 0);
 
 echo "Press ctrl+c to exit\n";

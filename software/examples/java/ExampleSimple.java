@@ -22,7 +22,7 @@ public class ExampleSimple {
 		lrf.enableLaser();
 		Thread.sleep(250);
 
-		// Get current distance (unit is cm)
+		// Get current distance
 		int distance = lrf.getDistance(); // Can throw com.tinkerforge.TimeoutException
 		System.out.println("Distance: " + distance + " cm");
 

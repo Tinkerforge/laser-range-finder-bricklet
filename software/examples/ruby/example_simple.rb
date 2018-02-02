@@ -20,7 +20,7 @@ ipcon.connect HOST, PORT # Connect to brickd
 lrf.enable_laser
 sleep 0.25
 
-# Get current distance (unit is cm)
+# Get current distance
 distance = lrf.get_distance
 puts "Distance: #{distance} cm"
 

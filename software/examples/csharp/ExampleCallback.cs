@@ -8,7 +8,7 @@ class Example
 	private static int PORT = 4223;
 	private static string UID = "XYZ"; // Change XYZ to the UID of your Laser Range Finder Bricklet
 
-	// Callback function for distance callback (parameter has unit cm)
+	// Callback function for distance callback
 	static void DistanceCB(BrickletLaserRangeFinder sender, int distance)
 	{
 		Console.WriteLine("Distance: " + distance + " cm");

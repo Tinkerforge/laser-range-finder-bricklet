@@ -10,7 +10,7 @@ import time
 from tinkerforge.ip_connection import IPConnection
 from tinkerforge.bricklet_laser_range_finder import BrickletLaserRangeFinder
 
-# Callback function for distance reached callback (parameter has unit cm)
+# Callback function for distance reached callback
 def cb_distance_reached(distance):
     print("Distance: " + str(distance) + " cm")
 
@@ -31,7 +31,7 @@ if __name__ == "__main__":
     # Register distance reached callback to function cb_distance_reached
     lrf.register_callback(lrf.CALLBACK_DISTANCE_REACHED, cb_distance_reached)
 
-    # Configure threshold for distance "greater than 20 cm" (unit is cm)
+    # Configure threshold for distance "greater than 20 cm"
     lrf.set_distance_callback_threshold(">", 20, 0)
 
     raw_input("Press key to exit\n") # Use input() in Python 3

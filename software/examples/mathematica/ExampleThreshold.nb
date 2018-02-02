@@ -27,12 +27,12 @@ Notebook[{
    RowBox[{"lrf", "@", RowBox[{"SetDebouncePeriod", "[", "10000", "]"}]}],
    RowBox[{"
 "}],
-   RowBox[{"(*", "Callback function for distance reached callback (parameter has unit cm)", "*)"}],
+   RowBox[{"(*", "Callback function for distance reached callback", "*)"}],
    RowBox[{RowBox[{"DistanceReachedCB", "[", RowBox[{"sender_", ",", "distance_"}], "]"}], ":=", "\[IndentingNewLine]", RowBox[{"Print", "[", RowBox[{"\"\<Distance: \>\"", "<>", RowBox[{"ToString", "[", RowBox[{"N", "[", RowBox[{"Quantity", "[", RowBox[{"distance", ",", "\"\<cm\>\""}], "]"}], "]"}], "]"}]}], "]"}]}],
    RowBox[{"AddEventHandler", "[", RowBox[{RowBox[{"lrf", "@", "DistanceReachedCallback"}], ",", "DistanceReachedCB"}], "]"}],
    RowBox[{"
 "}],
-   RowBox[{"(*", "Configure threshold for distance ", "\"\<greater than 20 cm\>\"", " (unit is cm)", "*)"}],
+   RowBox[{"(*", "Configure threshold for distance ", "\"\<greater than 20 cm\>\"", "", "*)"}],
    RowBox[{"option", "=", "Tinkerforge`BrickletLaserRangeFinder`THRESHOLDUOPTIONUGREATER"}],
    RowBox[{"lrf", "@", RowBox[{"SetDistanceCallbackThreshold", "[", RowBox[{"option", ",", "20", ",", "0"}], "]"}]}],
    RowBox[{"

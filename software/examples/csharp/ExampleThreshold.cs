@@ -8,7 +8,7 @@ class Example
 	private static int PORT = 4223;
 	private static string UID = "XYZ"; // Change XYZ to the UID of your Laser Range Finder Bricklet
 
-	// Callback function for distance reached callback (parameter has unit cm)
+	// Callback function for distance reached callback
 	static void DistanceReachedCB(BrickletLaserRangeFinder sender, int distance)
 	{
 		Console.WriteLine("Distance: " + distance + " cm");
@@ -33,7 +33,7 @@ class Example
 		// Register distance reached callback to function DistanceReachedCB
 		lrf.DistanceReachedCallback += DistanceReachedCB;
 
-		// Configure threshold for distance "greater than 20 cm" (unit is cm)
+		// Configure threshold for distance "greater than 20 cm"
 		lrf.SetDistanceCallbackThreshold('>', 20, 0);
 
 		Console.WriteLine("Press enter to exit");

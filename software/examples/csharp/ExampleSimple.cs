@@ -21,7 +21,7 @@ class Example
 		lrf.EnableLaser();
 		Thread.Sleep(250);
 
-		// Get current distance (unit is cm)
+		// Get current distance
 		int distance = lrf.GetDistance();
 		Console.WriteLine("Distance: " + distance + " cm");
 

@@ -24,7 +24,7 @@ const
 var
   e: TExample;
 
-{ Callback procedure for distance reached callback (parameter has unit cm) }
+{ Callback procedure for distance reached callback }
 procedure TExample.DistanceReachedCB(sender: TBrickletLaserRangeFinder;
                                      const distance: word);
 begin
@@ -53,7 +53,7 @@ begin
   { Register distance reached callback to procedure DistanceReachedCB }
   lrf.OnDistanceReached := {$ifdef FPC}@{$endif}DistanceReachedCB;
 
-  { Configure threshold for distance "greater than 20 cm" (unit is cm) }
+  { Configure threshold for distance "greater than 20 cm" }
   lrf.SetDistanceCallbackThreshold('>', 20, 0);
 
   WriteLn('Press key to exit');

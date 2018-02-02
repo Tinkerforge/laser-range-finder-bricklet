@@ -7,7 +7,7 @@ uid=XYZ # Change XYZ to the UID of your Laser Range Finder Bricklet
 tinkerforge call laser-range-finder-bricklet $uid enable-laser
 sleep 0.25
 
-# Handle incoming distance callbacks (parameter has unit cm)
+# Handle incoming distance callbacks
 tinkerforge dispatch laser-range-finder-bricklet $uid distance &
 
 # Set period for distance callback to 0.2s (200ms)

@@ -21,7 +21,7 @@ if __name__ == "__main__":
     lrf.enable_laser()
     time.sleep(0.25)
 
-    # Get current distance (unit is cm)
+    # Get current distance
     distance = lrf.get_distance()
     print("Distance: " + str(distance) + " cm")
 

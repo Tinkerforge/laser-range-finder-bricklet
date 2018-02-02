@@ -21,7 +21,7 @@ function octave_example_threshold()
     % Register distance reached callback to function cb_distance_reached
     lrf.addDistanceReachedCallback(@cb_distance_reached);
 
-    % Configure threshold for distance "greater than 20 cm" (unit is cm)
+    % Configure threshold for distance "greater than 20 cm"
     lrf.setDistanceCallbackThreshold(">", 20, 0);
 
     input("Press key to exit\n", "s");
@@ -29,7 +29,7 @@ function octave_example_threshold()
     ipcon.disconnect();
 end
 
-% Callback function for distance reached callback (parameter has unit cm)
+% Callback function for distance reached callback
 function cb_distance_reached(e)
     fprintf("Distance: %d cm\n", e.distance);
 end

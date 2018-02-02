@@ -20,7 +20,7 @@ $ipcon->connect(HOST, PORT); // Connect to brickd
 $lrf->enableLaser();
 usleep(250*1000);
 
-// Get current distance (unit is cm)
+// Get current distance
 $distance = $lrf->getDistance();
 echo "Distance: $distance cm\n";
 

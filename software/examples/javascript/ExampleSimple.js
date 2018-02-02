@@ -20,7 +20,7 @@ ipcon.on(Tinkerforge.IPConnection.CALLBACK_CONNECTED,
         lrf.enableLaser();
 
         setTimeout(function () {
-            // Get current distance (unit is cm)
+            // Get current distance
             lrf.getDistance(
                 function (distance) {
                     console.log('Distance: ' + distance + ' cm');

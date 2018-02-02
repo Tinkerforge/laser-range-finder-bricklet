@@ -29,7 +29,7 @@ int main(void) {
 	laser_range_finder_enable_laser(&lrf);
 	millisleep(250);
 
-	// Get current distance (unit is cm)
+	// Get current distance
 	uint16_t distance;
 	if(laser_range_finder_get_distance(&lrf, &distance) < 0) {
 		fprintf(stderr, "Could not get distance, probably timeout\n");

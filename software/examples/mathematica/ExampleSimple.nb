@@ -23,7 +23,7 @@ Notebook[{
    RowBox[{"Pause", "[", "0.25", "]"}],
    RowBox[{"
 "}],
-   RowBox[{"(*", "Get current distance (unit is cm)", "*)"}],
+   RowBox[{"(*", "Get current distance", "*)"}],
    RowBox[{"Print", "[", RowBox[{"\"\<Distance: \>\"", "<>", RowBox[{"ToString", "[", RowBox[{"N", "[", RowBox[{"Quantity", "[", RowBox[{RowBox[{"lrf", "@", RowBox[{"GetDistance", "[", "]"}]}], ",", "\"\<cm\>\""}], "]"}], "]"}], "]"}]}], "]"}],
    RowBox[{"
 "}],

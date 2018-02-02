@@ -7,7 +7,7 @@ use constant HOST => 'localhost';
 use constant PORT => 4223;
 use constant UID => 'XYZ'; # Change XYZ to the UID of your Laser Range Finder Bricklet
 
-# Callback subroutine for distance reached callback (parameter has unit cm)
+# Callback subroutine for distance reached callback
 sub cb_distance_reached
 {
     my ($distance) = @_;
@@ -31,7 +31,7 @@ $lrf->set_debounce_period(10000);
 # Register distance reached callback to subroutine cb_distance_reached
 $lrf->register_callback($lrf->CALLBACK_DISTANCE_REACHED, 'cb_distance_reached');
 
-# Configure threshold for distance "greater than 20 cm" (unit is cm)
+# Configure threshold for distance "greater than 20 cm"
 $lrf->set_distance_callback_threshold('>', 20, 0);
 
 print "Press key to exit\n";

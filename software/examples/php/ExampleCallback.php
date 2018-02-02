@@ -10,7 +10,7 @@ const HOST = 'localhost';
 const PORT = 4223;
 const UID = 'XYZ'; // Change XYZ to the UID of your Laser Range Finder Bricklet
 
-// Callback function for distance callback (parameter has unit cm)
+// Callback function for distance callback
 function cb_distance($distance)
 {
     echo "Distance: $distance cm\n";

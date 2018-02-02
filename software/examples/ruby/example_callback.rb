@@ -20,7 +20,7 @@ ipcon.connect HOST, PORT # Connect to brickd
 lrf.enable_laser
 sleep 0.25
 
-# Register distance callback (parameter has unit cm)
+# Register distance callback
 lrf.register_callback(BrickletLaserRangeFinder::CALLBACK_DISTANCE) do |distance|
   puts "Distance: #{distance} cm"
 end

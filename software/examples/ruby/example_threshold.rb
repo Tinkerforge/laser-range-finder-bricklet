@@ -23,12 +23,12 @@ sleep 0.25
 # Get threshold callbacks with a debounce time of 10 seconds (10000ms)
 lrf.set_debounce_period 10000
 
-# Register distance reached callback (parameter has unit cm)
+# Register distance reached callback
 lrf.register_callback(BrickletLaserRangeFinder::CALLBACK_DISTANCE_REACHED) do |distance|
   puts "Distance: #{distance} cm"
 end
 
-# Configure threshold for distance "greater than 20 cm" (unit is cm)
+# Configure threshold for distance "greater than 20 cm"
 lrf.set_distance_callback_threshold '>', 20, 0
 
 puts 'Press key to exit'

@@ -30,7 +30,7 @@ ipcon.on(Tinkerforge.IPConnection.CALLBACK_CONNECTED,
 
 // Register distance callback
 lrf.on(Tinkerforge.BrickletLaserRangeFinder.CALLBACK_DISTANCE,
-    // Callback function for distance callback (parameter has unit cm)
+    // Callback function for distance callback
     function (distance) {
         console.log('Distance: ' + distance + ' cm');
     }

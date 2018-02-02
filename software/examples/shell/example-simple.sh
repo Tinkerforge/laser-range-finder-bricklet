@@ -7,7 +7,7 @@ uid=XYZ # Change XYZ to the UID of your Laser Range Finder Bricklet
 tinkerforge call laser-range-finder-bricklet $uid enable-laser
 sleep 0.25
 
-# Get current distance (unit is cm)
+# Get current distance
 tinkerforge call laser-range-finder-bricklet $uid get-distance
 
 tinkerforge call laser-range-finder-bricklet $uid disable-laser # Turn laser off

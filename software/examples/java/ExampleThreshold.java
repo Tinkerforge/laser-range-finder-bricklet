@@ -25,14 +25,14 @@ public class ExampleThreshold {
 		// Get threshold callbacks with a debounce time of 10 seconds (10000ms)
 		lrf.setDebouncePeriod(10000);
 
-		// Add distance reached listener (parameter has unit cm)
+		// Add distance reached listener
 		lrf.addDistanceReachedListener(new BrickletLaserRangeFinder.DistanceReachedListener() {
 			public void distanceReached(int distance) {
 				System.out.println("Distance: " + distance + " cm");
 			}
 		});
 
-		// Configure threshold for distance "greater than 20 cm" (unit is cm)
+		// Configure threshold for distance "greater than 20 cm"
 		lrf.setDistanceCallbackThreshold('>', 20, 0);
 
 		System.out.println("Press key to exit"); System.in.read();

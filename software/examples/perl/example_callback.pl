@@ -7,7 +7,7 @@ use constant HOST => 'localhost';
 use constant PORT => 4223;
 use constant UID => 'XYZ'; # Change XYZ to the UID of your Laser Range Finder Bricklet
 
-# Callback subroutine for distance callback (parameter has unit cm)
+# Callback subroutine for distance callback
 sub cb_distance
 {
     my ($distance) = @_;

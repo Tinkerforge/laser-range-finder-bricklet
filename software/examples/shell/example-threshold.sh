@@ -10,10 +10,10 @@ sleep 0.25
 # Get threshold callbacks with a debounce time of 10 seconds (10000ms)
 tinkerforge call laser-range-finder-bricklet $uid set-debounce-period 10000
 
-# Handle incoming distance reached callbacks (parameter has unit cm)
+# Handle incoming distance reached callbacks
 tinkerforge dispatch laser-range-finder-bricklet $uid distance-reached &
 
-# Configure threshold for distance "greater than 20 cm" (unit is cm)
+# Configure threshold for distance "greater than 20 cm"
 tinkerforge call laser-range-finder-bricklet $uid set-distance-callback-threshold threshold-option-greater 20 0
 
 echo "Press key to exit"; read dummy

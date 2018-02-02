@@ -22,7 +22,7 @@ public class ExampleCallback {
 		lrf.enableLaser();
 		Thread.sleep(250);
 
-		// Add distance listener (parameter has unit cm)
+		// Add distance listener
 		lrf.addDistanceListener(new BrickletLaserRangeFinder.DistanceListener() {
 			public void distance(int distance) {
 				System.out.println("Distance: " + distance + " cm");

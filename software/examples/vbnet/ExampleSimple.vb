@@ -18,7 +18,7 @@ Module ExampleSimple
         lrf.EnableLaser()
         Thread.Sleep(250)
 
-        ' Get current distance (unit is cm)
+        ' Get current distance
         Dim distance As Integer = lrf.GetDistance()
         Console.WriteLine("Distance: " + distance.ToString() + " cm")
 
