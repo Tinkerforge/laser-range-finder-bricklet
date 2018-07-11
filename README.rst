@@ -10,9 +10,9 @@ Repository Content
 
 software/:
  * examples/: Examples for all supported languages
- * build/: Makefile and compiled files
+ * build/: Compiled files
  * src/: Source code of firmware
- * generate_makefile: Shell script to generate Makefile from cmake script
+ * Makefile: Makefile to build project
 
 hardware/:
  * Contains kicad project files and additionally schematics as pdf
