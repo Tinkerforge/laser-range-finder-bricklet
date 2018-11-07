@@ -16,10 +16,10 @@ fn main() -> Result<(), Box<dyn Error>> {
     lrf.enable_laser();
     thread::sleep(Duration::from_millis(250));
 
-    // Create receiver for distance events.
-    let distance_receiver = lrf.get_distance_receiver();
+    let distance_receiver = lrf.get_distance_callback_receiver();
 
-    // Spawn thread to handle received events. This thread ends when the `lrf` object
+    // Spawn thread to handle received callback messages.
+    // This thread ends when the `lrf` object
     // is dropped, so there is no need for manual cleanup.
     thread::spawn(move || {
         for distance in distance_receiver {

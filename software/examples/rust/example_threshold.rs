@@ -19,10 +19,10 @@ fn main() -> Result<(), Box<dyn Error>> {
     // Get threshold receivers with a debounce time of 10 seconds (10000ms).
     lrf.set_debounce_period(10000);
 
-    // Create receiver for distance reached events.
-    let distance_reached_receiver = lrf.get_distance_reached_receiver();
+    let distance_reached_receiver = lrf.get_distance_reached_callback_receiver();
 
-    // Spawn thread to handle received events. This thread ends when the `lrf` object
+    // Spawn thread to handle received callback messages.
+    // This thread ends when the `lrf` object
     // is dropped, so there is no need for manual cleanup.
     thread::spawn(move || {
         for distance_reached in distance_reached_receiver {
