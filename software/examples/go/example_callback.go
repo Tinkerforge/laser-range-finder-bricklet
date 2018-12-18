@@ -2,9 +2,9 @@ package main
 
 import (
 	"fmt"
+	"github.com/tinkerforge/go-api-bindings/ipconnection"
+	"github.com/tinkerforge/go-api-bindings/laser_range_finder_bricklet"
 	"time"
-	"tinkerforge/ipconnection"
-	"tinkerforge/laser_range_finder_bricklet"
 )
 
 const ADDR string = "localhost:4223"
