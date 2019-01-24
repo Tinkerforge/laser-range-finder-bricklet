@@ -3,10 +3,13 @@
 setup:
 	# Turn laser on and wait 250ms for very first measurement to be ready
 	publish '' to tinkerforge/request/laser_range_finder_bricklet/XYZ/enable_laser 
+	
 	wait for 0.25s 
+	
 	# Handle incoming distance callbacks
 	subscribe to tinkerforge/callback/laser_range_finder_bricklet/XYZ/distance
 	publish '{"register": true}' to tinkerforge/register/laser_range_finder_bricklet/XYZ/distance # Register distance callback
+	
 	# Set period for distance callback to 0.2s (200ms)
 	# Note: The distance callback is only called every 0.2 seconds
 	#       if the distance has changed since the last call!
