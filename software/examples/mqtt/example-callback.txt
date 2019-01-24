@@ -1,5 +1,3 @@
-
-
 # Change XYZ to the UID of your Laser Range Finder Bricklet
 
 setup:
