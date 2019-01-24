@@ -35,6 +35,5 @@ func main() {
 
 	fmt.Print("Press enter to exit.")
 	fmt.Scanln()
-
 	lrf.DisableLaser() // Turn laser off
 }
