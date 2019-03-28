@@ -8,7 +8,7 @@ setup:
 	
 	# Get current distance
 	subscribe to tinkerforge/response/laser_range_finder_bricklet/XYZ/get_distance
-	publish '' to tinkerforge/request/laser_range_finder_bricklet/XYZ/get_distance 
+	publish '' to tinkerforge/request/laser_range_finder_bricklet/XYZ/get_distance
 
 cleanup:
 	# If you are done, run this to clean up
