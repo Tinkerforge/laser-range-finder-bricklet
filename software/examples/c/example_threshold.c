@@ -42,7 +42,7 @@ int main(void) {
 	// Register distance reached callback to function cb_distance_reached
 	laser_range_finder_register_callback(&lrf,
 	                                     LASER_RANGE_FINDER_CALLBACK_DISTANCE_REACHED,
-	                                     (void *)cb_distance_reached,
+	                                     (void (*)(void))cb_distance_reached,
 	                                     NULL);
 
 	// Configure threshold for distance "greater than 20 cm"

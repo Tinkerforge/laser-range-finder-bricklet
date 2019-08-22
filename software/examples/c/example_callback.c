@@ -39,7 +39,7 @@ int main(void) {
 	// Register distance callback to function cb_distance
 	laser_range_finder_register_callback(&lrf,
 	                                     LASER_RANGE_FINDER_CALLBACK_DISTANCE,
-	                                     (void *)cb_distance,
+	                                     (void (*)(void))cb_distance,
 	                                     NULL);
 
 	// Set period for distance callback to 0.2s (200ms)
