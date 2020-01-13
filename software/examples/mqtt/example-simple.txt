@@ -3,9 +3,9 @@
 setup:
 	# Turn laser on and wait 250ms for very first measurement to be ready
 	publish '' to tinkerforge/request/laser_range_finder_bricklet/XYZ/enable_laser 
-	
+
 	wait for 0.25s 
-	
+
 	# Get current distance
 	subscribe to tinkerforge/response/laser_range_finder_bricklet/XYZ/get_distance
 	publish '' to tinkerforge/request/laser_range_finder_bricklet/XYZ/get_distance
