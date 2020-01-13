@@ -34,6 +34,6 @@ if __name__ == "__main__":
     # Configure threshold for distance "greater than 20 cm"
     lrf.set_distance_callback_threshold(">", 20, 0)
 
-    raw_input("Press key to exit\n") # Use input() in Python 3
+    input("Press key to exit\n") # Use raw_input() in Python 2
     lrf.disable_laser() # Turn laser off
     ipcon.disconnect()

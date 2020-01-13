@@ -25,6 +25,6 @@ if __name__ == "__main__":
     distance = lrf.get_distance()
     print("Distance: " + str(distance) + " cm")
 
-    raw_input("Press key to exit\n") # Use input() in Python 3
+    input("Press key to exit\n") # Use raw_input() in Python 2
     lrf.disable_laser() # Turn laser off
     ipcon.disconnect()

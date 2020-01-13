@@ -33,6 +33,6 @@ if __name__ == "__main__":
     #       if the distance has changed since the last call!
     lrf.set_distance_callback_period(200)
 
-    raw_input("Press key to exit\n") # Use input() in Python 3
+    input("Press key to exit\n") # Use raw_input() in Python 2
     lrf.disable_laser() # Turn laser off
     ipcon.disconnect()
