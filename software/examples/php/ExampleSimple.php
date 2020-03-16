@@ -26,7 +26,9 @@ echo "Distance: $distance cm\n";
 
 echo "Press key to exit\n";
 fgetc(fopen('php://stdin', 'r'));
+
 $lrf->disableLaser(); // Turn laser off
+
 $ipcon->disconnect();
 
 ?>

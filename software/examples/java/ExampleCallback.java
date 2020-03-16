@@ -35,7 +35,9 @@ public class ExampleCallback {
 		lrf.setDistanceCallbackPeriod(200);
 
 		System.out.println("Press key to exit"); System.in.read();
+
 		lrf.disableLaser(); // Turn laser off
+
 		ipcon.disconnect();
 	}
 }

@@ -38,7 +38,9 @@ class Example
 
 		Console.WriteLine("Press enter to exit");
 		Console.ReadLine();
+
 		lrf.DisableLaser(); // Turn laser off
+
 		ipcon.Disconnect();
 	}
 }

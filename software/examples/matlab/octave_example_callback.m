@@ -24,7 +24,9 @@ function octave_example_callback()
     lrf.setDistanceCallbackPeriod(200);
 
     input("Press key to exit\n", "s");
+
     lrf.disableLaser(); % Turn laser off
+
     ipcon.disconnect();
 end
 

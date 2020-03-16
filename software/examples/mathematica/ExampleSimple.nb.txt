@@ -17,8 +17,8 @@ Pause[0.25]
 (*Get current distance*)
 Print["Distance: "<>ToString[N[Quantity[lrf@GetDistance[],"cm"]]]]
 
-(*Clean up*)
 lrf@DisableLaser[](*Turn laser off*)
+
 ipcon@Disconnect[]
 ReleaseNETObject[lrf]
 ReleaseNETObject[ipcon]

@@ -27,7 +27,9 @@ public class ExampleSimple {
 		System.out.println("Distance: " + distance + " cm");
 
 		System.out.println("Press key to exit"); System.in.read();
+
 		lrf.disableLaser(); // Turn laser off
+
 		ipcon.disconnect();
 	}
 }

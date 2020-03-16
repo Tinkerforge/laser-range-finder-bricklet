@@ -25,7 +25,9 @@ function octave_example_threshold()
     lrf.setDistanceCallbackThreshold(">", 20, 0);
 
     input("Press key to exit\n", "s");
+
     lrf.disableLaser(); % Turn laser off
+
     ipcon.disconnect();
 end
 

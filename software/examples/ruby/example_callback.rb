@@ -32,5 +32,7 @@ lrf.set_distance_callback_period 200
 
 puts 'Press key to exit'
 $stdin.gets
+
 lrf.disable_laser # Turn laser off
+
 ipcon.disconnect

@@ -24,5 +24,7 @@ print "Distance: $distance cm\n";
 
 print "Press key to exit\n";
 <STDIN>;
+
 $lrf->disable_laser(); # Turn laser off
+
 $ipcon->disconnect();

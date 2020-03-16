@@ -21,6 +21,8 @@ function matlab_example_simple()
     fprintf('Distance: %i cm\n', distance);
 
     input('Press key to exit\n', 's');
+
     lrf.disableLaser(); % Turn laser off
+
     ipcon.disconnect();
 end

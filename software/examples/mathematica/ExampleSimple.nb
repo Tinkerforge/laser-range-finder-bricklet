@@ -27,8 +27,9 @@ Notebook[{
    RowBox[{"Print", "[", RowBox[{"\"\<Distance: \>\"", "<>", RowBox[{"ToString", "[", RowBox[{"N", "[", RowBox[{"Quantity", "[", RowBox[{RowBox[{"lrf", "@", RowBox[{"GetDistance", "[", "]"}]}], ",", "\"\<cm\>\""}], "]"}], "]"}], "]"}]}], "]"}],
    RowBox[{"
 "}],
-   RowBox[{"(*", "Clean up", "*)"}],
    RowBox[{"lrf", "@", RowBox[{"DisableLaser", "[", "]"}], RowBox[{"(*", "Turn laser off", "*)"}]}],
+   RowBox[{"
+"}],
    RowBox[{"ipcon", "@", RowBox[{"Disconnect", "[", "]"}]}],
    RowBox[{"ReleaseNETObject", "[", "lrf", "]"}],
    RowBox[{"ReleaseNETObject", "[", "ipcon", "]"}]

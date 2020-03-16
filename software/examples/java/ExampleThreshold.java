@@ -36,7 +36,9 @@ public class ExampleThreshold {
 		lrf.setDistanceCallbackThreshold('>', 20, 0);
 
 		System.out.println("Press key to exit"); System.in.read();
+
 		lrf.disableLaser(); // Turn laser off
+
 		ipcon.disconnect();
 	}
 }

@@ -24,7 +24,9 @@ Module ExampleSimple
 
         Console.WriteLine("Press key to exit")
         Console.ReadLine()
+
         lrf.DisableLaser() ' Turn laser off
+
         ipcon.Disconnect()
     End Sub
 End Module

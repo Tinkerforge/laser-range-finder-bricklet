@@ -34,5 +34,7 @@ if __name__ == "__main__":
     lrf.set_distance_callback_period(200)
 
     input("Press key to exit\n") # Use raw_input() in Python 2
+
     lrf.disable_laser() # Turn laser off
+
     ipcon.disconnect()

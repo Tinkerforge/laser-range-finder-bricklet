@@ -28,8 +28,8 @@ lrf@SetDistanceCallbackThreshold[option,20,0]
 
 Input["Click OK to exit"]
 
-(*Clean up*)
 lrf@DisableLaser[](*Turn laser off*)
+
 ipcon@Disconnect[]
 ReleaseNETObject[lrf]
 ReleaseNETObject[ipcon]

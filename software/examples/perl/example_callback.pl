@@ -36,5 +36,7 @@ $lrf->set_distance_callback_period(200);
 
 print "Press key to exit\n";
 <STDIN>;
+
 $lrf->disable_laser(); # Turn laser off
+
 $ipcon->disconnect();

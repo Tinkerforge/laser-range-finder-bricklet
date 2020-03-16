@@ -20,6 +20,8 @@ function octave_example_simple()
     fprintf("Distance: %d cm\n", distance);
 
     input("Press key to exit\n", "s");
+
     lrf.disableLaser(); % Turn laser off
+
     ipcon.disconnect();
 end
