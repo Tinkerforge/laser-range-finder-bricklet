@@ -7,7 +7,7 @@ setup:
 	wait for 0.25s
 
 	# Get threshold callbacks with a debounce time of 10 seconds (10000ms)
-	publish '{"debounce": 10000}' to tinkerforge/request/laser-range-finder_bricklet/XYZ/set_debounce_period
+	publish '{"debounce": 10000}' to tinkerforge/request/laser_range_finder_bricklet/XYZ/set_debounce_period
 
 	# Handle incoming distance reached callbacks
 	subscribe to tinkerforge/callback/laser_range_finder_bricklet/XYZ/distance_reached
