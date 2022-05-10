@@ -25,7 +25,7 @@ func main() {
 
 	// Get current distance.
 	distance, _ := lrf.GetDistance()
-	fmt.Printf("Distance:  cm\n", distance)
+	fmt.Printf("Distance: %d cm\n", distance)
 
 	fmt.Print("Press enter to exit.")
 	fmt.Scanln()
